@@ -3,28 +3,36 @@
 	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
-	<display-name>spring-mvc</display-name>
+	<display-name>spring-board</display-name>
 
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
-		<!-- container를 생성하는 일 안해도 돼 이제! 그냥 spring이 여기 있다!만 알려주면 자동으로 생성해주니까 -->
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-  			classpath:config/spring/spring-mvc.xml
-  		</param-value>
+  			/WEB-INF/spring-mvc.xml
+  			</param-value>
 		</init-param>
-		<!-- *.do 할 때가 아니라 서버가 구동될 때 -->
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:config/spring/context-*.xml
+		</param-value>
+	 </context-param>
+
+	 <listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	 </listener> 
 
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
-	
-	<!-- 구분하려고 준거야~ 꼭 필요한 건 아님! -->
+
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>*.json</url-pattern>
@@ -52,5 +60,4 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-	
 </web-app>
