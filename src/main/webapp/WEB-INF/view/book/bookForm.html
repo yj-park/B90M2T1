@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script src="../js/jquery-3.1.1.js"></script>
+<style>
+	#leftArea {
+		float: left;
+	}
+	
+	#centerArea {
+		padding-left: 50px;
+		float: left;
+	}
+	#rightArea {
+		padding-left: 50px;
+		float: left;
+	}
+</style>
+<body>
+	<p id="brief"></p>
+	<div id="leftArea"> 
+		<div id="calendar">
+			
+		</div>
+		<div id="rChoose">
+			<form id="rForm" action="book.do">
+				<h4>ㄴ.시간선택</h4>>
+				<select id="startTime">
+				</select>
+				<select id="endTime">
+				</select>
+				<h4>ㄷ.예약자정보</h4>
+				<input type="text" name="memberId" placeholder="아이디입력">
+				<h4>숫자만 입력해주세요.</h4>
+				<input type="text" name="memberMobile" placeholder="전화번호 입력">
+				<h4>ㄹ.방선택</h4>
+				<input type="radio" id="roomA" name="roomName" value="a">
+				<label for="roomA">A</label>
+				<input type="radio" id="roomB" name="roomName" value="b">
+				<label for="roomA">B</label>
+				<input type="radio" id="roomC" name="roomName" value="c">
+				<label for="roomA">C</label>
+				<input type="radio" id="roomD" name="roomName" value="d">
+				<label for="roomA">D</label>
+				<input type="radio" id="roomE" name="roomName" value="e">
+				<label for="roomA">E</label>
+				<input type="radio" id="roomF" name="roomName" value="f">
+				<label for="roomA">F</label>
+				<hr>
+				<br>
+				<button type="submit">예약</button>
+			</form>
+		</div>
+	</div>
+	<div id="centerArea">
+		<img id="roomReservationInfo" width="500px" height="400px"/>
+	</div>
+	
+	<div id="rightArea">
+		<img id="roomSpecInfo" width="300px" height="400px"/>
+	</div>
+	
+	<script>
+		/* 셀렉트박스 옵션값 넣기  */
+		var first = 10;
+		var last = 24;
+		$(function () {
+			var startHtml = "";
+			var endHtml = "";
+			for(i = first; i <= last; i++) {
+				if(i < 23) {
+					if(i < first + 2) {
+						if(i == 10) {
+							startHtml += "<option value='" + i + "' selected >"+ i +" </option>";
+							continue;
+						}
+						startHtml += "<option value='" + i + "' >"+ i +" </option>";
+					} 
+					else {
+						if(i == 12) {
+							endHtml += "<option value='" + i + "' selected >"+ i +" </option>";
+							startHtml += "<option value='" + i + "' >"+ i +" </option>";
+							continue;
+						}
+						startHtml += "<option value='" + i + "' >"+ i +" </option>";
+						endHtml += "<option value='" + i + "' >"+ i +" </option>";
+					}
+						
+				}
+				else {
+					endHtml += "<option value='" + i + "' >"+ i +" </option>";
+				}
+			}
+			$("#startTime").html(startHtml);
+			$("#endTime").html(endHtml);
+		});
+		
+		/*form submit 이벤트발생시  */
+		$("#rForm").submit(function () {
+			alert("예약실패");
+			
+			return false;
+		});
+
+
+		$("input[type=radio]").on("click", function () { //select박스 제외하고 선택하려고 input엘리먼트중에 체크된거 가져오려면 $("input:checked")
+			var room = $(this).val();
+			$.ajax({
+				url: "/mini_mvc_test/book/roomInfo.do",
+				data: {"roomName": room},
+				dataType: "text"
+				})
+			.done(function(result) {
+				$("#roomSpecInfo").attr("src", result);
+			});
+			
+		});
+		
+		
+		/* 예약정보이미지 가져오기 */
+		function structInfo(room) {
+			$.ajax({
+				url: "/mini_mvc_test/book/roomInfo.do",
+				data: {"roomName": room},
+				dataType: "text"
+				})
+			.done(function(result) {
+				console.log(result);
+				$("#roomReservationInfo").attr("src", result);
+			});
+		}
+		
+		// 페이지 로딩시 방구조 이미지  ajax 호출
+		structInfo("roomstruct");
+	</script>
+	
+</body>
+</html>
