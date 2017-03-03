@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.co.easybook.repository.vo.BookVO;
+
 @Controller
 @RequestMapping("/book")
 public class BookController {
