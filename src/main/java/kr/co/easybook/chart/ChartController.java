@@ -1,4 +1,4 @@
-package mini2t1.test.chart;
+package kr.co.easybook.chart;
 
 import javax.servlet.http.HttpServletResponse;
 

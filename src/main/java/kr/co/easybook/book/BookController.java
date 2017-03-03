@@ -1,4 +1,4 @@
-package mini2t1.test.book;
+package kr.co.easybook.book;
 
 import javax.servlet.http.HttpServletRequest;
 
