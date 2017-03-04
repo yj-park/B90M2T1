@@ -24,8 +24,6 @@ public class BookController {
 	}
 	@RequestMapping("/book.do")
 	public String book(BookVO book, RedirectAttributes attr) {
-			//redirect 1회성 데이터 전송하면 페이지를 새로고침했을 때  msg가 또 alert되는것을 막을 수 있다.
-			
 			attr.addFlashAttribute("msg", "예약이 완료되었습니다.");
 			return "main/main";
 		
