@@ -16,10 +16,11 @@ public class BookController {
 	@ResponseBody
 	public String roomInfo(HttpServletRequest request) {
 		String path = request.getContextPath();
+		System.out.println(path);
 		String roomName = request.getParameter("roomName");
-		System.out.println(roomName);
 		
-		path += "/roomimg/" + roomName + ".jpg";
+		
+		path += path + "/img/" + roomName + ".jpg";
 		return path;
 	}
 	@RequestMapping("/book.do")

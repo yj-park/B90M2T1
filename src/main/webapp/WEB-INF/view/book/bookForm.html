@@ -106,10 +106,10 @@
 		});
 
 
-		$("input[type=radio]").on("click", function () { //select박스 제외하고 선택하려고 input엘리먼트중에 체크된거 가져오려면 $("input:checked")
+		$("input[type=radio]").on("click", function () { 
 			var room = $(this).val();
 			$.ajax({
-				url: "/mini_mvc_test/book/roomInfo.do",
+				url: "roomInfo.do",
 				data: {"roomName": room},
 				dataType: "text"
 				})
@@ -123,7 +123,7 @@
 		/* 예약정보이미지 가져오기 */
 		function structInfo(room) {
 			$.ajax({
-				url: "/mini_mvc_test/book/roomInfo.do",
+				url: "roomInfo.do",
 				data: {"roomName": room},
 				dataType: "text"
 				})
