@@ -20,7 +20,7 @@ public class BookController {
 		String roomName = request.getParameter("roomName");
 		
 		
-		path += path + "/img/" + roomName + ".jpg";
+		path += "/img/" + roomName + ".jpg";
 		return path;
 	}
 	@RequestMapping("/book.do")
