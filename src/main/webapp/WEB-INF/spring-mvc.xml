@@ -39,10 +39,6 @@
 
 	<!-- 메인페이지 이동 -->
 	<mvc:view-controller path="/main/main.do" />
-	<!-- 글쓰기 폼 이동 -->
-	<mvc:view-controller path="/board/writeForm.do" />
-	<!-- 로그인 폼 이동 -->
-	<mvc:view-controller path="/login/loginForm.do" />
 	<!-- 예약 폼 이동 -->
 	<mvc:view-controller path="/book/bookForm.do" view-name="book/bookForm" />
 	<!-- 예약현황 이동 -->
@@ -50,6 +46,12 @@
 	
 	<!-- 위치안내 이동 -->
 	<mvc:view-controller path="/location/locationInfo.do" view-name="location/locationInfo" />
+	
+	<!-- 로그인 폼 이동 -->
+	<mvc:view-controller path="/member/memberLoginForm.do" view-name="member/memberLoginForm"/>
+	<!-- 회원가입 폼 이동 -->
+	<mvc:view-controller path="/member/memberJoinForm.do" view-name="member/memberJoinForm"/>
+	
 	
 	<mvc:default-servlet-handler />
 	<mvc:view-resolvers>

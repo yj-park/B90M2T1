@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.easybook.repository.mapper.MemberMapper">
+
+	<resultMap id="memberMap" type="memberVO" >
+		<result property="id" column="id"/>
+		<result property="password" column="password"/>
+		<result property="name" column="name"/>
+		<result property="mobileNo" column="mobile_no"/>
+		<result property="regDate" column="reg_date"/>
+	</resultMap>
+	
+    <!-- 회원가입 -->
+    <insert id="insertMem">
+    	insert into tb_member(
+    		id,
+    		password,
+    		name,
+    		mobile_no
+    	) values (
+    		#{id},
+    		#{password},
+    		#{name},
+    		#{mobileNo}    		
+    	)
+    </insert>
+
+    
+	<!-- 사이트 내 로그인 -->
+    <select id="innerLogin" parameterType="memberVO" resultMap="memberMap">
+    	select *
+    	  from tb_member
+    	 where id = #{id}
+    	   and password = #{password}
+    </select>
+    <!-- 소셜 로그인 -->
+    <select id="outerLogin" parameterType="memberVO" resultMap="memberMap">
+    	select *
+    	  from tb_member
+    	 where id = #{id}
+    </select>
+    
+    
+    <!-- 회원정보 상세조회 -->
+    <select id="selectMemInfo" parameterType="string" resultType="memberVO">
+    	select *
+    	  from tb_member
+    	 where id = #{id}
+    </select>
+    
+    
+    <!-- 회원정보 수정 -->
+    <update id="updateMemInfo" parameterType="memberVO">
+    	update tb_member
+    	   set password = #{password},
+    	   	   mobile_no = #{mobileNo}
+    	 where id = #{id}
+    </update>
+    
+    
+    <!-- 예약정보 조회 
+    <select id="selectMemReservInfo" >
+    </select>
+    -->
+    
+    <!-- 
+    member 아이디 중복 조회
+    <select id="selectMemIdList" parameterType="string" resultType="string">
+		select id 
+		  from tb_member
+		 where id = #{id}
+	</select>
+	
+	회원가입한 member 조회
+	<select id="selectMemList" parameterType="string" resultType="member">
+		select *
+		  from tb_member
+		 where id = #{id}
+	</select>
+     -->
+</mapper> 
