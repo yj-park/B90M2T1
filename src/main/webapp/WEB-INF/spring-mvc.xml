@@ -48,6 +48,9 @@
 	<!-- 예약현황 이동 -->
 	<mvc:view-controller path="/chart/chartList.do" view-name="chart/chartList" />
 	
+	<!-- 위치안내 이동 -->
+	<mvc:view-controller path="/location/locationInfo.do" view-name="location/locationInfo" />
+	
 	<mvc:default-servlet-handler />
 	<mvc:view-resolvers>
 		<mvc:jsp prefix="/WEB-INF/view/" suffix=".html" />

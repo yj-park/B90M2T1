@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        width: 600px;
+        height: 500px;
+        top: 100px;
+        margin: 0 auto;
+      }
+      hr {
+      	width: 600px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <br><br><br><br><hr>
+    <script type="text/javascript">
+	    var userLatitude;
+	    var userLongitude;
+
+	    if(navigator.geolocation) {
+			navigator.geolocation.watchPosition(function(pos) {
+				userLatitude = pos.coords.latitude;
+				userLongitude =  pos.coords.longitude;
+				initMap(userLatitude, userLongitude);
+ 				console.log(userLatitude);
+ 				console.log(userLongitude);
+
+			}, function(e) {
+				console.log({
+					0: '위치 정보 검색에 문제가 있습니다.(msg:' + e.message + ')',
+					1: '현재 페이지에서 사용자가 위치 정보 검색을 거부했습니다.',
+					2: '브라우저가 위치정보를 검색하지 못했습니다.(msg:' + e.message + ')',
+					3: '브라우저의 위치 정보 검색 시간이 초과됐습니다.'
+				}[e.code]);
+			
+			}, {
+				enbleHeighAccuracy: true,
+				timeout: 10000,
+				maximumAge: 0
+			});
+		}	
+		
+		
+		
+    	
+    	
+		
+		
+// 		GoogleMap = {
+// 			initialize : function(latitude, longitude) {
+// 				var geocoder = new google.maps.Geocoder();
+// 				geocoder.geocode({'latLng': new google.maps.LatLng(latitude, longitude)},
+// 					function(result, status) {
+// 					if(status == google.maps.GeocoderStatus.OK) {
+// 						alert("사용자의 위치 : " + result[2].formatted_address);
+// 						initMap(userLatitude, userLongitude);
+// 					}
+// 				}	
+// 				);
+// 			}
+			
+// 		}
+		
+
+		var map;
+		function initMap(userLatitude, userLongitude) {
+			map = new google.maps.Map(document.getElementById('map'), {
+				center: {lat: 37.494546, lng: 127.028014},
+		    	zoom: 16,
+			});
+		
+			
+		  var contentString = '<div id="content">'+
+			  '<div id="siteNotice">'+
+			  '</div>'+
+			  '<h1 id="firstHeading" class="firstHeading">이지북(easybook)</h1>'+
+			  '<div id="bodyContent">'+
+			  '<p><b>주소</b><br>' +
+			  '우편번호 : 06621.<br>' +
+			  '신주소: 서울 서초구 강남대로53길 8 비트아카데미 빌딩.<br>'+
+			  '지번: 서울 서초구 서초동 1327-15. <br>'+
+			  '<p><b>대표번호</b><br>' +
+			  'TEL: 02-3468-9600.<br>'+
+			  'FAX: 02-6007-1245. <br>'+
+			  '<p><b>영업시간</b><br>'+
+			  '10:00 ~ 24:00.<br>'+
+			  '평일, 공휴일 동일 운영. <br>'+
+			  '<p><b>교통</b><br>'+
+			  '지하철 2호선 강남역 5번출구 3분거리<br>'+
+			  '<p><b>찾아오시는방법</b><br>'+
+			  '강남역 7번 또는 5번 출구로 나와 직진.<br> '+
+			  '삼성화재 건물에서 우회전 후 대명스포츠와 춘하추동 사이 길 우측에 위치. <br>'+
+			  '<p>Attribution: easybook, <a href="https://www.easybook.com"></a></p>'+
+			  '</div>'+
+			  '</div>';
+		
+			var infowindow = new google.maps.InfoWindow({
+				content: contentString,
+				maxWidth: 200
+			});
+		  
+	  
+			var marker = new google.maps.Marker({
+				  position: {lat: 37.494546, lng: 127.028014},
+				  map: map,
+				  title: '이지북(easybook)',
+				  label: 'D'
+				  });
+	  
+			var marker1 = new google.maps.Marker({
+				  //userLatitude, userLongitude
+				  position: {lat: userLatitude, lng: userLongitude},
+				  map: map,
+				  title: '내위치',
+				  label: 'Me'
+				  });
+				console.log(userLatitude);
+				console.log(userLongitude);
+			
+			var flightPlanCoordinates = [
+    		    	{lat: 37.494546, lng: 127.028014},
+        			{lat: userLatitude, lng: userLongitude}
+        			];	
+			             			
+			             		  
+	   	 	var flightPath = new google.maps.Polyline({
+	   			    path: flightPlanCoordinates,
+	    			geodesic: true,
+	   			    strokeColor: '#FF0000',
+	   			    strokeWeight: 4
+	   			  });
+	
+	   			  flightPath.setMap(map);
+			
+			
+			marker.addListener('click', function() {
+			    infowindow.open(map, marker);
+			  });
+			
+			
+		}
+
+    </script>
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLmksOYTmsJWyYYG99c4wbxJQwYItpNtQ&">
+   </script> 
+<!--     <script async defer -->
+<!--       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLmksOYTmsJWyYYG99c4wbxJQwYItpNtQ&callback=initMap"> -->
+<!--     </script> -->
+<!--     <script type="text/javascript" -->
+<!--   	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLmksOYTmsJWyYYG99c4wbxJQwYItpNtQ&libraries=drawing"> -->
+<!-- 	</script> -->
+  </body>
+</html>
