@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+#leftArea {
+		padding-left: 50px;
+		float: left;
+	}
+	
+	#centerArea {
+		float: left;
+	}
+	#rightArea {
+		padding-left: 50px;
+		float: left;
+	}
+	#bottom {
+		clear: both;
+	}

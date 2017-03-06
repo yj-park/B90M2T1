@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+	    html, body {
+	    	height: 100%;
+	    	margin: 0;
+	    	padding: 0;
+	    }
+	    
+	    #container{
+	    	width: 1200px;
+	    	height: 520px;
+	    	margin-top: 120px;
+	    	margin-left: 250px;
+	    }
+	    
+	    #detail{
+			width: 1200px;
+			height: 500px;
+	    	margin-left: 300px;
+	    }
+	    
+	    #map {
+			width: 600px;
+			height: 500px;
+			border: 3px solid tomato;
+			margin-left: 50px;
+			float: left;
+	    }
+	     p, span{ 
+			margin: 0;
+			padding: 0;
+	     } 
+	     #locationTitle {
+	     	margin-left: 50px;
+	     }
+	     #locationTitle span{
+	      	margin-left: 50px;
+	      	display: block;
+			margin: 3px;
+			padding: 0;
+			font-size: 18px;
+			font-family: trebuchet ms,helvetica,sans-serif;
+			color: rgb(0, 0, 0);
+	     }
+	
+		#titleContent span{
+			display: block;
+			margin: 3px;
+			padding: 0;
+			font-size: 18px;
+			font-family: trebuchet ms,helvetica,sans-serif;
+			color: rgb(0, 0, 0);
+		}
+	
+		#subContent span{
+			display: block;
+			margin: 5px;
+			padding: 0;
+			font-size: 14px;
+			font-family: trebuchet ms,helvetica,sans-serif;
+			color: rgb(0, 0, 0);
+		}
+	
+		#right-panel {
+			float: right;
+			width: 400px;
+			line-height: 21px;
+		}
+		
+		#right-panel {
+		  font-family: 'Roboto','sans-serif';
+		  padding-left: 10px;
+		}
+		
+		#right-panel i {
+		  font-size: 12px;
+		}
+	
+		.panel {
+			overflow: auto;
+		}
+		
+		div.warnbox-content, div.warnbox-c2 {
+			display: none;
+		}
+    </style>
+  </head>
+  <body>
+    <div id="container">
+	    <p id="locationTitle">
+		    <span>
+		    	<strong>[이지북(easybook) 위치안내]</strong>
+		    </span>
+	    <p>
+	    <div id="map"></div>
+	    <div id="right-panel">
+	      <p>Total Distance: <span id="total"></span></p>
+	    </div>
+    </div>
+    <br>
+	<div id="detail">	
+		<p id="titleContent">
+		    <span>
+		    	<strong>이지북(easybook)</strong>
+		    </span>
+	    <p>
+	    <p id="subContent">
+		    <span><strong>[주소]</strong></span>
+		    <span>우편번호 :&nbsp;06621</span>
+		    <span>신주소 :&nbsp;서울 서초구 강남대로 53길 8 비트아케디미빌딩</span>
+		    <span>지번 :&nbsp;서울 서초구 서초동 1327-15</span>
+	    </p><br>
+	    <p id="subContent">
+		    <span><strong>[대표번호]</strong></span>
+		    <span>TEL :&nbsp;02-3468-9600</span>
+		    <span>FAX :&nbsp;02-6007-1245</span>
+	    </p><br>
+	    <p id="subContent">
+		    <span><strong>[영업시간]</strong></span>
+		    <span>10:00 ~ 24:00</span>
+		    <span>평일, 공휴일 동일 운영</span>
+	    </p><br>
+	    <p id="subContent">
+		    <span><strong>[교통]</strong></span>
+		    <span>지하철 :&nbsp;2호선 강남역 5번출구 3분거리</span>
+	    </p><br>
+	    <p id="subContent">
+		    <span><strong>[찾아오시는방법]</strong></span>
+		    <span>강남역 7번 또는 5번 출구로 나와 직진</span>
+		    <span>삼성화재 건물에서 우회전 후 대명스포츠와 춘하추동 사이 길 우측</span>
+	    </p>
+
+    </div>
+    <script type="text/javascript">
+	    var userLatitude;
+	    var userLongitude;
+
+	    if(navigator.geolocation) {
+			navigator.geolocation.watchPosition(function(pos) {
+				userLatitude = pos.coords.latitude;
+				userLongitude =  pos.coords.longitude;
+				initMap(userLatitude, userLongitude);
+//  				console.log(userLatitude);
+//  				console.log(userLongitude);
+			}, function(e) {
+				console.log({
+					0: '위치 정보 검색에 문제가 있습니다.(msg:' + e.message + ')',
+					1: '현재 페이지에서 사용자가 위치 정보 검색을 거부했습니다.',
+					2: '브라우저가 위치정보를 검색하지 못했습니다.(msg:' + e.message + ')',
+					3: '브라우저의 위치 정보 검색 시간이 초과됐습니다.'
+				}[e.code]);
+			
+			}, {
+				enbleHeighAccuracy: true,
+				timeout: 10000,
+				maximumAge: 0
+			});
+		}	
+		
+
+		var map;
+		function initMap(userLatitude, userLongitude) {
+			var directionsDisplay = new google.maps.DirectionsRenderer({
+			    draggable: true,
+			    map: map,
+			    panel: document.getElementById('right-panel')
+			  });
+
+			var directionsService = new google.maps.DirectionsService;
+			map = new google.maps.Map(document.getElementById('map'), {
+				center: {lat: 37.494546, lng: 127.028014},
+		    	zoom: 16,
+		    
+			});
+			
+			directionsDisplay.addListener('directions_changed', function() {
+				    computeTotalDistance(directionsDisplay.getDirections());
+				  });
+
+		    displayRoute(userLatitude, userLongitude, directionsService,
+		      directionsDisplay);
+				
+
+
+		  //마커 클릭시 나타낼 정보창	  
+		  var contentString = '<div id="content">'+
+			  '<div id="siteNotice">'+
+			  '</div>'+
+			  '<h1 id="firstHeading" class="firstHeading">이지북(easybook)</h1>'+
+			  '<div id="bodyContent">'+
+			  '<p><b>주소</b><br>' +
+			  '우편번호 : 06621.<br>' +
+			  '신주소: 서울 서초구 강남대로53길 8 비트아카데미 빌딩.<br>'+
+			  '지번: 서울 서초구 서초동 1327-15. <br>'+
+			  '<p><b>대표번호</b><br>' +
+			  'TEL: 02-3468-9600.<br>'+
+			  'FAX: 02-6007-1245. <br>'+
+			  '<p><b>영업시간</b><br>'+
+			  '10:00 ~ 24:00.<br>'+
+			  '평일, 공휴일 동일 운영. <br>'+
+			  '<p><b>교통</b><br>'+
+			  '지하철 2호선 강남역 5번출구 3분거리<br>'+
+			  '<p><b>찾아오시는방법</b><br>'+
+			  '강남역 7번 또는 5번 출구로 나와 직진.<br> '+
+			  '삼성화재 건물에서 우회전 후 대명스포츠와 춘하추동 사이 길 우측에 위치. <br>'+
+			  '<p>Attribution: easybook, <a href="https://www.easybook.com"></a></p>'+
+			  '</div>'+
+			  '</div>';
+			
+			//정보창 옵션  
+			var infowindow = new google.maps.InfoWindow({
+				content: contentString,
+				maxWidth: 200
+			});
+		  
+	  		//이지북 위치에 마커
+			var marker = new google.maps.Marker({
+				  position: {lat: 37.494546, lng: 127.028014},
+				  map: map,
+				 title: '이지북(easybook)',
+				 label: 'D'
+				  });
+	  		//사용자 위치에 마커
+			var marker1 = new google.maps.Marker({
+				  //userLatitude, userLongitude
+				  position: {lat: userLatitude, lng: userLongitude},
+				  map: map,
+				  title: '내위치',
+				  label: 'Me'
+				  });
+// 				console.log(userLatitude);
+// 				console.log(userLongitude);
+				
+				
+				directionsDisplay.setMap(map);
+				calculateAndDisplayRoute(directionsService, directionsDisplay, userLatitude, userLongitude);
+
+			marker.addListener('click', function() {
+			    infowindow.open(map, marker);
+			  });
+			
+			
+		}
+		
+		//
+		function displayRoute(origin, destination, service, display) {
+			  service.route({
+				origin: {lat: 37.494546, lng: 127.028014},  
+	 			destination: {lat: userLatitude, lng: userLongitude},
+			    travelMode: google.maps.TravelMode.TRANSIT
+			  }, function(response, status) {
+			    if (status === google.maps.DirectionsStatus.OK) {
+			      display.setDirections(response);
+			    } else {
+			      alert('Could not display directions due to: ' + status);
+			    }
+			  });
+			}
+		
+		
+		//두 점 사이 경로구하기
+		function calculateAndDisplayRoute(directionsService, directionsDisplay, userLatitude, userLongitude) {
+			directionsService.route({
+			    origin: {lat: 37.494546, lng: 127.028014},  
+			    destination: {lat: userLatitude, lng: userLongitude},
+			    travelMode: google.maps.TravelMode.TRANSIT
+			  }, function(response, status) {
+			    if (status == google.maps.DirectionsStatus.OK) {
+			      directionsDisplay.setDirections(response);
+			    } else {
+			      window.alert('Directions request failed due to ' + status);
+			    }
+			  });
+			}
+		
+		
+		//두 점 사이 거리구하기
+		function computeTotalDistance(result) {
+			  var total = 0;
+			  var myroute = result.routes[0];
+			  for (var i = 0; i < myroute.legs.length; i++) {
+			    total += myroute.legs[i].distance.value;
+			  }
+			  total = total / 1000;
+			  document.getElementById('total').innerHTML = total + ' km';
+			}
+
+    </script>
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLmksOYTmsJWyYYG99c4wbxJQwYItpNtQ&">
+   </script> 
+  </body>
+</html>
