@@ -2,40 +2,148 @@
 <html>
   <head>
     <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #map {
-        width: 600px;
-        height: 500px;
-        top: 100px;
-        margin: 0 auto;
-      }
-      hr {
-      	width: 600px;
-      }
-
-      
+	    html, body {
+	    	height: 100%;
+	    	margin: 0;
+	    	padding: 0;
+	    }
+	    
+	    #container{
+	    	width: 1200px;
+	    	height: 520px;
+	    	margin-top: 120px;
+	    	margin-left: 250px;
+	    }
+	    
+	    #detail{
+			width: 1200px;
+			height: 500px;
+	    	margin-left: 300px;
+	    }
+	    
+	    #map {
+			width: 600px;
+			height: 500px;
+			border: 3px solid tomato;
+			margin-left: 50px;
+			float: left;
+	    }
+	     p, span{ 
+			margin: 0;
+			padding: 0;
+	     } 
+	     #locationTitle {
+	     	margin-left: 50px;
+	     }
+	     #locationTitle span{
+	      	margin-left: 50px;
+	      	display: block;
+			margin: 3px;
+			padding: 0;
+			font-size: 18px;
+			font-family: trebuchet ms,helvetica,sans-serif;
+			color: rgb(0, 0, 0);
+	     }
+	
+		#titleContent span{
+			display: block;
+			margin: 3px;
+			padding: 0;
+			font-size: 18px;
+			font-family: trebuchet ms,helvetica,sans-serif;
+			color: rgb(0, 0, 0);
+		}
+	
+		#subContent span{
+			display: block;
+			margin: 5px;
+			padding: 0;
+			font-size: 14px;
+			font-family: trebuchet ms,helvetica,sans-serif;
+			color: rgb(0, 0, 0);
+		}
+	
+		#right-panel {
+			float: right;
+			width: 400px;
+			line-height: 21px;
+		}
+		
+		#right-panel {
+		  font-family: 'Roboto','sans-serif';
+		  padding-left: 10px;
+		}
+		
+		#right-panel i {
+		  font-size: 12px;
+		}
+	
+		.panel {
+			overflow: auto;
+		}
+		
+		div.warnbox-content, div.warnbox-c2 {
+			display: none;
+		}
     </style>
   </head>
   <body>
-    <div id="map"></div>
-    
-    
+    <div id="container">
+	    <p id="locationTitle">
+		    <span>
+		    	<strong>[이지북(easybook) 위치안내]</strong>
+		    </span>
+	    <p>
+	    <div id="map"></div>
+	    <div id="right-panel">
+	      <p>Total Distance: <span id="total"></span></p>
+	    </div>
+    </div>
+    <br>
+	<div id="detail">	
+		<p id="titleContent">
+		    <span>
+		    	<strong>이지북(easybook)</strong>
+		    </span>
+	    <p>
+	    <p id="subContent">
+		    <span><strong>[주소]</strong></span>
+		    <span>우편번호 :&nbsp;06621</span>
+		    <span>신주소 :&nbsp;서울 서초구 강남대로 53길 8 비트아케디미빌딩</span>
+		    <span>지번 :&nbsp;서울 서초구 서초동 1327-15</span>
+	    </p><br>
+	    <p id="subContent">
+		    <span><strong>[대표번호]</strong></span>
+		    <span>TEL :&nbsp;02-3468-9600</span>
+		    <span>FAX :&nbsp;02-6007-1245</span>
+	    </p><br>
+	    <p id="subContent">
+		    <span><strong>[영업시간]</strong></span>
+		    <span>10:00 ~ 24:00</span>
+		    <span>평일, 공휴일 동일 운영</span>
+	    </p><br>
+	    <p id="subContent">
+		    <span><strong>[교통]</strong></span>
+		    <span>지하철 :&nbsp;2호선 강남역 5번출구 3분거리</span>
+	    </p><br>
+	    <p id="subContent">
+		    <span><strong>[찾아오시는방법]</strong></span>
+		    <span>강남역 7번 또는 5번 출구로 나와 직진</span>
+		    <span>삼성화재 건물에서 우회전 후 대명스포츠와 춘하추동 사이 길 우측</span>
+	    </p>
+
+    </div>
     <script type="text/javascript">
 	    var userLatitude;
 	    var userLongitude;
 
 	    if(navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(function(pos) {
+			navigator.geolocation.watchPosition(function(pos) {
 				userLatitude = pos.coords.latitude;
 				userLongitude =  pos.coords.longitude;
 				initMap(userLatitude, userLongitude);
- 				console.log(userLatitude);
- 				console.log(userLongitude);
-
+//  				console.log(userLatitude);
+//  				console.log(userLongitude);
 			}, function(e) {
 				console.log({
 					0: '위치 정보 검색에 문제가 있습니다.(msg:' + e.message + ')',
@@ -51,31 +159,15 @@
 			});
 		}	
 		
-		
-		
-    	
-    	
-		
-//		사용자의 주소 알림창 띄우기
-// 		GoogleMap = {
-// 			initialize : function(latitude, longitude) {
-// 				var geocoder = new google.maps.Geocoder();
-// 				geocoder.geocode({'latLng': new google.maps.LatLng(latitude, longitude)},
-// 					function(result, status) {
-// 					if(status == google.maps.GeocoderStatus.OK) {
-// 						alert("사용자의 위치 : " + result[2].formatted_address);
-// 						initMap(userLatitude, userLongitude);
-// 					}
-// 				}	
-// 				);
-// 			}
-			
-// 		}
-		
 
 		var map;
 		function initMap(userLatitude, userLongitude) {
-			var directionsDisplay = new google.maps.DirectionsRenderer;
+			var directionsDisplay = new google.maps.DirectionsRenderer({
+			    draggable: true,
+			    map: map,
+			    panel: document.getElementById('right-panel')
+			  });
+
 			var directionsService = new google.maps.DirectionsService;
 			map = new google.maps.Map(document.getElementById('map'), {
 				center: {lat: 37.494546, lng: 127.028014},
@@ -83,8 +175,16 @@
 		    
 			});
 			
+			directionsDisplay.addListener('directions_changed', function() {
+				    computeTotalDistance(directionsDisplay.getDirections());
+				  });
 
-			  
+		    displayRoute(userLatitude, userLongitude, directionsService,
+		      directionsDisplay);
+				
+
+
+		  //마커 클릭시 나타낼 정보창	  
 		  var contentString = '<div id="content">'+
 			  '<div id="siteNotice">'+
 			  '</div>'+
@@ -108,20 +208,21 @@
 			  '<p>Attribution: easybook, <a href="https://www.easybook.com"></a></p>'+
 			  '</div>'+
 			  '</div>';
-		
+			
+			//정보창 옵션  
 			var infowindow = new google.maps.InfoWindow({
 				content: contentString,
 				maxWidth: 200
 			});
 		  
-	  
+	  		//이지북 위치에 마커
 			var marker = new google.maps.Marker({
 				  position: {lat: 37.494546, lng: 127.028014},
 				  map: map,
 				 title: '이지북(easybook)',
 				 label: 'D'
 				  });
-	  
+	  		//사용자 위치에 마커
 			var marker1 = new google.maps.Marker({
 				  //userLatitude, userLongitude
 				  position: {lat: userLatitude, lng: userLongitude},
@@ -129,30 +230,13 @@
 				  title: '내위치',
 				  label: 'Me'
 				  });
-				console.log(userLatitude);
-				console.log(userLongitude);
+// 				console.log(userLatitude);
+// 				console.log(userLongitude);
 				
 				
 				directionsDisplay.setMap(map);
-
 				calculateAndDisplayRoute(directionsService, directionsDisplay, userLatitude, userLongitude);
-				
-//			두 점 사이 선긋기				
-// 			var flightPlanCoordinates = [
-//     		    	{lat: 37.494546, lng: 127.028014},
-//         			{lat: userLatitude, lng: userLongitude}
-//         			];	
-			             			
-			             		  
-// 	   	 	var flightPath = new google.maps.Polyline({
-// 	   			    path: flightPlanCoordinates,
-// 	    			geodesic: true,
-// 	   			    strokeColor: '#FF0000',
-// 	   			    strokeWeight: 4
-// 	   			  });
-	
-// 	   			  flightPath.setMap(map);
-			
+
 			marker.addListener('click', function() {
 			    infowindow.open(map, marker);
 			  });
@@ -160,7 +244,23 @@
 			
 		}
 		
+		//
+		function displayRoute(origin, destination, service, display) {
+			  service.route({
+				origin: {lat: 37.494546, lng: 127.028014},  
+	 			destination: {lat: userLatitude, lng: userLongitude},
+			    travelMode: google.maps.TravelMode.TRANSIT
+			  }, function(response, status) {
+			    if (status === google.maps.DirectionsStatus.OK) {
+			      display.setDirections(response);
+			    } else {
+			      alert('Could not display directions due to: ' + status);
+			    }
+			  });
+			}
 		
+		
+		//두 점 사이 경로구하기
 		function calculateAndDisplayRoute(directionsService, directionsDisplay, userLatitude, userLongitude) {
 			directionsService.route({
 			    origin: {lat: 37.494546, lng: 127.028014},  
@@ -174,17 +274,22 @@
 			    }
 			  });
 			}
-
 		
+		
+		//두 점 사이 거리구하기
+		function computeTotalDistance(result) {
+			  var total = 0;
+			  var myroute = result.routes[0];
+			  for (var i = 0; i < myroute.legs.length; i++) {
+			    total += myroute.legs[i].distance.value;
+			  }
+			  total = total / 1000;
+			  document.getElementById('total').innerHTML = total + ' km';
+			}
+
     </script>
     <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLmksOYTmsJWyYYG99c4wbxJQwYItpNtQ&sensor=true">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLmksOYTmsJWyYYG99c4wbxJQwYItpNtQ&">
    </script> 
-<!--     <script async defer
-<!--       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLmksOYTmsJWyYYG99c4wbxJQwYItpNtQ&callback=initMap"> -->
-<!--     </script> 
-<!--     <script type="text/javascript" -->
-<!--   	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLmksOYTmsJWyYYG99c4wbxJQwYItpNtQ&libraries=drawing"> -->
-<!-- 	</script> -->
   </body>
 </html>
