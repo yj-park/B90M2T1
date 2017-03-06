@@ -5,6 +5,7 @@
 <title>Insert title here</title>
 </head>
 <script src="../js/jquery-3.1.1.js"></script>
+<script src="../js/validUtil.js"></script>
 <style>
 	#leftArea {
 		float: left;
@@ -26,16 +27,16 @@
 			
 		</div>
 		<div id="rChoose">
-			<form id="rForm" action="book.do">
+			<form id="rForm">
 				<h4>ㄴ.시간선택</h4>>
-				<select id="startTime">
+				<select id="startTime" name="startTime">
 				</select>
-				<select id="endTime">
+				<select id="endTime" name="endTime">
 				</select>
 				<h4>ㄷ.예약자정보</h4>
 				<input type="text" name="memberId" placeholder="아이디입력">
 				<h4>숫자만 입력해주세요.</h4>
-				<input type="text" name="memberMobile" placeholder="전화번호 입력">
+				<input type="text" name="memberMobileNo" placeholder="전화번호 입력">
 				<h4>ㄹ.방선택</h4>
 				<input type="radio" id="roomA" name="roomName" value="a">
 				<label for="roomA">A</label>
@@ -51,7 +52,7 @@
 				<label for="roomA">F</label>
 				<hr>
 				<br>
-				<button type="submit">예약</button>
+				<button>예약</button>
 			</form>
 		</div>
 	</div>
@@ -100,12 +101,44 @@
 		
 		/*form submit 이벤트발생시  */
 		$("#rForm").submit(function () {
-			alert("예약실패");
+			var rf = $("#rForm");
+			console.log($("#rForm > [name=memberId]").val());
+			if($("#rForm > [name=startTime]").val() >= $("#rForm > [name=endTime]").val()) {
+				alert("예약종료시간을 확인해 주세요");
+				return false;
+			}
+			if($("#rForm > [name=memberId]").val() == ""){
+				alert("예약자 아이디를 입력해 주세요");
+				return false;
+			}
+			if($("#rForm > [name=memberMobileNo]").val() == "") {
+				alert("예약자 전화번호를 입력해 주세요");
+				return false;
+			}
+			if($("input:checked").val() == null) {
+				alert("방을 선택해 주세요");
+				return false; 
+			}
+			alert("예약체크 완료");
 			
+			$.ajax({
+				url: "book.do",
+				data: {
+						"bookStartTime" : $("#rForm > [name=startTime]").val(),
+						"bookEndTime" : $("#rForm > [name=endTime]").val(),
+						"memberId" : $("#rForm > [name=memberId]").val(),
+						"mobileNo" : $("#rForm > [name=memberMobileNo]").val(),
+						"roomName" : $("input:checked").val()
+				},
+				dataType : "text"
+			})
+			.done(function(result) {
+				alert(result);
+			})
 			return false;
 		});
 
-
+		/* 방 라디오버튼 클릭시 이미지 보여주기 */
 		$("input[type=radio]").on("click", function () { 
 			var room = $(this).val();
 			$.ajax({

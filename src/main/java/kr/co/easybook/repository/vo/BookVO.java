@@ -3,37 +3,56 @@ package kr.co.easybook.repository.vo;
 import java.util.Date;
 
 public class BookVO {
-	private int bookNo;
+	private int no;
 	private String memberId;
-	private String bookRoom;
-	private String bookHeadcount;
+	private String mobileNo;
+	private String headCnt;
+	private int bookStartTime;
+	private int bookEndTime;
+	private String roomName;
 	private Date bookDate;
-	private int bookStarttime;
-	private int bookEndtime;
-	private Date bookRegdate;
-	public int getBookNo() {
-		return bookNo;
+	private Date regdate;
+	public int getNo() {
+		return no;
 	}
-	public void setBookNo(int bookNo) {
-		this.bookNo = bookNo;
+	public void setNo(int no) {
+		this.no = no;
 	}
 	public String getMemberId() {
 		return memberId;
 	}
+	public String getMobileNo() {
+		return mobileNo;
+	}
+	public void setMobileNo(String mobileNo) {
+		this.mobileNo = mobileNo;
+	}
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public String getBookRoom() {
-		return bookRoom;
+	public String getHeadCnt() {
+		return headCnt;
 	}
-	public void setBookRoom(String bookRoom) {
-		this.bookRoom = bookRoom;
+	public void setHeadCnt(String headCnt) {
+		this.headCnt = headCnt;
 	}
-	public String getBookHeadcount() {
-		return bookHeadcount;
+	public int getBookStartTime() {
+		return bookStartTime;
 	}
-	public void setBookHeadcount(String bookHeadcount) {
-		this.bookHeadcount = bookHeadcount;
+	public void setBookStartTime(int bookStartTime) {
+		this.bookStartTime = bookStartTime;
+	}
+	public int getBookEndTime() {
+		return bookEndTime;
+	}
+	public void setBookEndTime(int bookEndTime) {
+		this.bookEndTime = bookEndTime;
+	}
+	public String getRoomName() {
+		return roomName;
+	}
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
 	}
 	public Date getBookDate() {
 		return bookDate;
@@ -41,23 +60,11 @@ public class BookVO {
 	public void setBookDate(Date bookDate) {
 		this.bookDate = bookDate;
 	}
-	public int getBookStarttime() {
-		return bookStarttime;
+	public Date getRegdate() {
+		return regdate;
 	}
-	public void setBookStarttime(int bookStarttime) {
-		this.bookStarttime = bookStarttime;
-	}
-	public int getBookEndtime() {
-		return bookEndtime;
-	}
-	public void setBookEndtime(int bookEndtime) {
-		this.bookEndtime = bookEndtime;
-	}
-	public Date getBookRegdate() {
-		return bookRegdate;
-	}
-	public void setBookRegdate(Date bookRegdate) {
-		this.bookRegdate = bookRegdate;
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
 	}
 	
 }
