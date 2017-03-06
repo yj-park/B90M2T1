@@ -3,7 +3,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.easybook.repository.mapper.BookMapper">
 		
-	 <insert id="insertBook" parameterType="bookVO">
+<insert id="insertBook" parameterType="bookVO">
 	   	insert into tb_book(
 		   	no, 
 		    member_id, 
@@ -23,7 +23,20 @@
 		    #{roomName},
 		    #{bookDate}
 		)    
-    </insert>
+ </insert>
+ 
+ <resultMap type="roomInfoVO" id="roomInfoMap">
+ 	<result property="no" column="no"/>
+ 	<result property="imgSavePath" column="img_save_path"/>
+ 	<result property="maxHeadCnt" column="max_head_cnt"/>
+ 	<result property="name" column="name"/>
+ </resultMap>
+ 
+  <select id="selectRoomInfo" parameterType="string" resultMap="roomInfoMap">
+ 	select * 
+ 	from tb_room_info
+ 	where name = #{name} 
+ </select>
 	
 	
 </mapper>

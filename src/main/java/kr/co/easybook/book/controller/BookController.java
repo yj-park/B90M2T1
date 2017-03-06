@@ -1,28 +1,32 @@
 package kr.co.easybook.book.controller;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import kr.co.easybook.book.service.BookService;
+import kr.co.easybook.repository.vo.RoomInfoVO;
+
+@RestController
 @RequestMapping("/book")
 public class BookController {
+	@Autowired
+	BookService bookService;
 	@RequestMapping("/roomInfo.do")
-	@ResponseBody
-	public String roomInfo(HttpServletRequest request) {
+	public RoomInfoVO roomInfo(HttpServletRequest request) {
 		String path = request.getContextPath();
-		System.out.println(path);
+		Map<String, Object> map = new HashMap<>();
 		String roomName = request.getParameter("roomName");
+		//path += "/img/" + roomName + ".jpg";
 		
-		
-		path += "/img/" + roomName + ".jpg";
-		return path;
+		return bookService.retriveRoomInfo(roomName);
 	}
-	public List<Object> room(HttpServletRequest request) {
+	public String room(HttpServletRequest request) {
 		
 		String path = request.getContextPath();
 		System.out.println(path);
@@ -33,7 +37,6 @@ public class BookController {
 		return path;
 	}
 	@RequestMapping("/book.do")
-	@ResponseBody
 	public String book(HttpServletRequest request) {
 		System.out.println(request.getParameter("startTime"));
 			System.out.println(request.getParameter("endTime"));

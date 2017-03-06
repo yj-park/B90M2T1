@@ -22,6 +22,16 @@ create table tb_room_info (
 	);
 create sequence s_room_info_no;
 
+insert into tb_room_info (	no,
+							img_save_path,
+							max_head_cnt,
+							name ) 
+					values( s_room_info_no.nextVal(),
+							'/mini2-team1/img/a.jpg',
+							6,
+							'a'
+					);
+
 ========예약통계테이블======== 
 create table tb_statistic (
 	no number(10) primary key,
