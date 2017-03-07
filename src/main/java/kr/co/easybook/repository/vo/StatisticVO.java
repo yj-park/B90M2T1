@@ -1,12 +1,10 @@
 package kr.co.easybook.repository.vo;
 
-import java.util.Date;
-
 public class StatisticVO {
 	private int no;
 	private String bookRoomName;
 	private int useTime;
-	private Date bookDate;
+	private String bookDate;
 	public int getNo() {
 		return no;
 	}
@@ -25,11 +23,12 @@ public class StatisticVO {
 	public void setUseTime(int useTime) {
 		this.useTime = useTime;
 	}
-	public Date getBookDate() {
+	public String getBookDate() {
 		return bookDate;
 	}
-	public void setBookDate(Date bookDate) {
+	public void setBookDate(String bookDate) {
 		this.bookDate = bookDate;
 	}
+
 	
 }

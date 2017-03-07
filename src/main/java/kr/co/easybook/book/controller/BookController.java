@@ -1,6 +1,9 @@
 package kr.co.easybook.book.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,24 +22,37 @@ import kr.co.easybook.repository.vo.StatisticVO;
 public class BookController {
 	@Autowired
 	BookService bookService;
+	
 	@RequestMapping("/roomInfo.do")
 	public RoomInfoVO roomInfo(HttpServletRequest request) {
-		String path = request.getContextPath();
-		Map<String, Object> map = new HashMap<>();
 		String roomName = request.getParameter("roomName");
-			
 		return bookService.retriveRoomInfo(roomName);
 	}
-/*	public String room(HttpServletRequest request) {
+	
+	@RequestMapping("/timeCheck.do")
+	public List<BookVO> bookTimeCheck(BookVO bookVO) {
+		/*BookVO bookVO = new BookVO();
+		System.out.println(request.getParameter("bookDate"));
+		System.out.println(request.getParameter("bookStartTime"));
+		System.out.println(request.getParameter("bookEndTime"));
+		bookVO.setBookDate(request.getParameter("bookDate"));
+		bookVO.setBookStartTime(Integer.parseInt(request.getParameter("bookStartTime")));
+		bookVO.setBookEndTime(Integer.parseInt(request.getParameter("bookEndTime")));*/
 		
-		String path = request.getContextPath();
-		System.out.println(path);
-		String roomName = request.getParameter("roomName");
-		
-		
-		path += "/img/" + roomName + ".jpg";
-		return path;
-	}*/
+		System.out.println(bookVO.getBookStartTime());
+		System.out.println(bookVO.getBookEndTime());
+		System.out.println(bookVO.getBookDate());
+		List<BookVO> list = bookService.checkBookTime(bookVO);
+		System.out.println("체크");
+		System.out.println("예약정보개수 : " + list.size());
+		for(BookVO book : list) {
+			System.out.println(book.getBookStartTime());
+			System.out.println(book.getBookEndTime());
+			System.out.println(book.getRoomName());
+		}
+		return list;
+	}
+	
 	@RequestMapping("/book.do")
 	public Map<String, Object> book(BookVO book) {
 		Map<String, Object> map = new HashMap<>();

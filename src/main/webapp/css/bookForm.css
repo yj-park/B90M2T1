@@ -1,16 +1,26 @@
 @CHARSET "UTF-8";
 #leftArea {
 		padding-left: 50px;
+		padding-top: 50px;
 		float: left;
 	}
 	
 	#centerArea {
 		float: left;
+		padding-left: 50px;
+		padding-top: 50px;
 	}
 	#rightArea {
 		padding-left: 50px;
 		float: left;
+		padding-top: 50px;
 	}
 	#bottom {
+		padding-top: 50px;
 		clear: both;
+	}
+	
+	#container {
+		width: 1250px;
+		height: 700px;
 	}

@@ -10,8 +10,8 @@ public class BookVO {
 	private int bookStartTime;
 	private int bookEndTime;
 	private String roomName;
-	private Date bookDate;
-	private Date regdate;
+	private String bookDate;
+	private Date regDate;
 	public int getNo() {
 		return no;
 	}
@@ -21,14 +21,14 @@ public class BookVO {
 	public String getMemberId() {
 		return memberId;
 	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 	public String getMobileNo() {
 		return mobileNo;
 	}
 	public void setMobileNo(String mobileNo) {
 		this.mobileNo = mobileNo;
-	}
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
 	}
 	public String getHeadCnt() {
 		return headCnt;
@@ -54,17 +54,18 @@ public class BookVO {
 	public void setRoomName(String roomName) {
 		this.roomName = roomName;
 	}
-	public Date getBookDate() {
+	public String getBookDate() {
 		return bookDate;
 	}
-	public void setBookDate(Date bookDate) {
+	public void setBookDate(String bookDate) {
 		this.bookDate = bookDate;
 	}
-	public Date getRegdate() {
-		return regdate;
+	public Date getRegDate() {
+		return regDate;
 	}
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
+
 	
 }

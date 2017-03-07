@@ -4,6 +4,27 @@
 <mapper namespace="kr.co.easybook.repository.mapper.BookMapper">
 
 <!-- ===================== 예약정보 ===================== -->
+<resultMap type="bookVO" id="bookMap">
+ 	<result column="no" property="no"/>
+ 	<result column="head_cnt" property="headCnt"/>
+ 	<result column="member_id" property="memberId"/>
+ 	<result column="book_date" property="bookDate"/>
+ 	<result column="book_start_time" property="bookStartTime"/>
+ 	<result column="book_end_time" property="bookEndTime"/>
+ 	<result column="room_name" property="roomName"/>
+ 	<result column="reg_date" property="regDate"/>
+</resultMap>
+<!-- 예약시간 체크하기 -->
+<select id="selectBookTime" parameterType="bookVO" resultMap="bookMap">
+	select room_name, book_start_time, book_end_time
+	from tb_book
+	where book_date = #{bookDate} <![CDATA[
+		  and ((book_start_time <= #{bookStartTime} and book_end_time > #{bookStartTime}) 
+		  or (book_start_time < #{bookEndTime} and book_end_time > #{bookEndTime})
+		  or (book_start_time >= #{bookStartTime} and book_end_time <= #{bookEndTime}))
+		  
+		 ]]>
+</select> 
 <!-- 예약정보저장 -->	
 <insert id="insertBook" parameterType="bookVO">
 	   	insert into tb_book(

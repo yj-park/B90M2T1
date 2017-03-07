@@ -6,11 +6,12 @@
 		</div>
 		<div id="rChoose">
 			<form id="rForm">
-				<h4>ㄴ.시간선택</h4>>
+				<h4>ㄴ.시간선택</h4>
 				<select id="startTime" name="startTime">
 				</select>
 				<select id="endTime" name="endTime">
 				</select>
+				<button id="timeChk"type="button">예약시간 확인</button>
 				<h4>ㄷ.예약자정보</h4>
 				<input type="text" name="memberId" placeholder="아이디입력">
 				<h4>숫자만 입력해주세요.</h4>
@@ -82,6 +83,38 @@
 			$("#startTime").html(startHtml);
 			$("#endTime").html(endHtml);
 		};
+		
+		// 예약시간 체크하기
+		$("#timeChk").click(function () {
+			if($("#rForm > [name=startTime]").val() >= $("#rForm > [name=endTime]").val()) {
+				alert("시작시간과 종료시간을  확인해 주세요");
+				return false;
+			}
+			$.ajax({
+				url : "book/timeCheck.do",
+				data : {
+						"bookDate" :  "20170307",
+						"bookStartTime" : $("#rForm > [name=startTime]").val(), 
+						"bookEndTime" : $("#rForm > [name=endTime]").val(),
+						},
+				dataType : "json"
+			})
+			.done(function (result) {
+				if(result.length === 0) {
+					alert("모든방 예약이 가능합니다.");
+				}
+				else {
+					console.dir(result);
+					var html = "";
+					for(i = 0; i < result.length; i++) {
+						html += "<h6>" + result[i].roomName + " : " + result[i].bookStartTime + "-" + result[i].bookEndTime + "</h6>";
+					}
+					$("#bottom").html(html);
+				}
+			})
+		}); 
+		
+		
 		/*form submit 이벤트발생시  */
 		$("#rForm").submit(function () {
 			var rf = $("#rForm");
@@ -105,7 +138,7 @@
 			alert("예약체크 완료");
 			
 			$.ajax({
-				url: "book.do",
+				url: "book/book.do",
 				data: {	
 						"bookDate" : new Date(),
 						"bookStartTime" : $("#rForm > [name=startTime]").val(),
@@ -118,13 +151,13 @@
 			})
 			.done(function(result) {
 				alert(result);
-			})
+			});
 			return false;
 		});
-
+		
+		
 		/* 방 라디오버튼 클릭시 이미지 보여주기 */
 		$("input[type=radio]").on("click", function () { 
-			console.log("라디오버튼클릭됨")
 			var room = $(this).val();
 			$.ajax({
 				url: "book/roomInfo.do",
@@ -132,11 +165,8 @@
 				dataType: "json"
 				})
 			.done(function(result) {
-				console.log(result);
-				console.log(result.no);
 				$("#roomSpecInfo").attr("src", result.imgSavePath);
 			});
-			
 		});
 		
 		
