@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.easybook.book.service.BookService;
+import kr.co.easybook.repository.vo.BookVO;
 import kr.co.easybook.repository.vo.RoomInfoVO;
+import kr.co.easybook.repository.vo.StatisticVO;
 
 @RestController
 @RequestMapping("/book")
@@ -22,11 +24,10 @@ public class BookController {
 		String path = request.getContextPath();
 		Map<String, Object> map = new HashMap<>();
 		String roomName = request.getParameter("roomName");
-		//path += "/img/" + roomName + ".jpg";
-		
+			
 		return bookService.retriveRoomInfo(roomName);
 	}
-	public String room(HttpServletRequest request) {
+/*	public String room(HttpServletRequest request) {
 		
 		String path = request.getContextPath();
 		System.out.println(path);
@@ -35,15 +36,17 @@ public class BookController {
 		
 		path += "/img/" + roomName + ".jpg";
 		return path;
-	}
+	}*/
 	@RequestMapping("/book.do")
-	public String book(HttpServletRequest request) {
-		System.out.println(request.getParameter("startTime"));
-			System.out.println(request.getParameter("endTime"));
-			System.out.println(request.getParameter("memberId"));
-			System.out.println(request.getParameter("memberMobileNo"));
-			System.out.println(request.getParameter("roomName"));
-			return "ajax리턴";
+	public Map<String, Object> book(BookVO book) {
+		Map<String, Object> map = new HashMap<>();
+//		통계정보 저장
+		StatisticVO statistic = new StatisticVO();
+		statistic.setUseTime(book.getBookEndTime() - book.getBookStartTime());
+		statistic.setBookRoomName(book.getRoomName());
+		statistic.setBookDate(book.getBookDate());
+		bookService.regBook(book, statistic);
+		return map;
 		
 	}
 }

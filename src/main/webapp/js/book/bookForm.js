@@ -1,7 +1,11 @@
-	/* 셀렉트박스 옵션값 넣기  */
+/**
+ * bookForm.html에 연결할 js 파일 
+ */	
+
+/* 셀렉트박스 옵션값 넣기  */
 		var first = 10;
 		var last = 24;
-		$(function () {
+		function makeSelect() {
 			var startHtml = "";
 			var endHtml = "";
 			for(i = first; i <= last; i++) {
@@ -30,7 +34,7 @@
 			}
 			$("#startTime").html(startHtml);
 			$("#endTime").html(endHtml);
-		});
+		};
 		
 		/*form submit 이벤트발생시  */
 		$("#rForm").submit(function () {
@@ -73,14 +77,15 @@
 
 		/* 방 라디오버튼 클릭시 이미지 보여주기 */
 		$("input[type=radio]").on("click", function () { 
+			console.log("라디오버튼클릭됨")
 			var room = $(this).val();
 			$.ajax({
-				url: "roomInfo.do",
+				url: "book/roomInfo.do",
 				data: {"roomName": room},
 				dataType: "text"
 				})
 			.done(function(result) {
-				$("#roomSpecInfo").attr("src", result.);
+				$("#roomSpecInfo").attr("src", result.imgSavePath);
 			});
 			
 		});
@@ -89,7 +94,7 @@
 		/* 예약정보이미지 가져오기 */
 		function structInfo(room) {
 			$.ajax({
-				url: "roomInfo.do",
+				url: "book/roomInfo.do",
 				data: {"roomName": room},
 				dataType: "text"
 				})
@@ -100,4 +105,4 @@
 		}
 		
 		// 페이지 로딩시 방구조 이미지  ajax 호출
-		structInfo("roomstruct");
+//		structInfo("roomstruct");

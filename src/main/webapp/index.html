@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="css/bookForm.css">
 <style>
 body {font-family: "Times New Roman", Georgia, Serif;}
 h1,h2,h3,h4,h5,h6 {
@@ -11,17 +12,18 @@ h1,h2,h3,h4,h5,h6 {
     letter-spacing: 5px;
 }
 </style>
+<script src="js/jquery-3.1.1.js"></script>
 <body>
 
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
   <div class="w3-bar w3-white w3-wide w3-padding-8 w3-card-2">
-    <a href="#home" class="w3-bar-item w3-button w3-margin-left">Easy Book</a>
+    <a href="#home" id="main" class="w3-bar-item w3-button w3-margin-left">Easy Book</a>
     <!-- Right-sided navbar links. Hide them on small screens -->
     <div class="w3-right w3-hide-small">
    
-      <a href="book/bookForm.do" class="w3-bar-item w3-button">예약</a>
-      <a href="chart/chartList.do" class="w3-bar-item w3-button">예약현황</a>
+      <a id="book" class="w3-bar-item w3-button">예약</a>
+      <a id="chart" class="w3-bar-item w3-button">예약현황</a>
       <a href="#menu" class="w3-bar-item w3-button">커뮤니티</a>
       <a href="location/locationInfo.do" class="w3-bar-item w3-button ">위치안내</a>
       <a href="member/memberLoginForm.do" class="w3-bar-item w3-button" id="login">로그인</a>
@@ -30,19 +32,35 @@ h1,h2,h3,h4,h5,h6 {
     </div>
   </div>
 </div>
-
-<!-- Header -->
-<header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
-  <img class="w3-image" src="img/d64df474a9dc989c7868df42aaad6c7f.jpg" alt="Hamburger Catering" width="1600" height="800">
-  <div class="w3-display-bottomleft w3-padding-xlarge w3-opacity">
-    <h1 class="w3-xxlarge">Study</h1>
-  </div>
-</header>
-
-<!-- Page content -->
-<div class="w3-content" style="max-width:1100px">
+<div id="container">
 
 </div>
+<script>
+$(document).ready( function() {
+
+	$("#container").load("view/main/main.html");
+});
+$("#chart").click(function () {
+// 	$(".view").attr("style", "display:none");	
+	$("#container").load("view/chart/chartList.html");
+// 	$("#chartView").attr("style", "display:block");
+});
+$("#main").click(function () {
+// 	$(".view").attr("style", "display:none");	
+	$("#container").load("view/main/main.html");
+// 	$("#mainView").attr("style", "display:block");
+});
+$("#book").click(function () {
+// 	$(".view").attr("style", "display:none");	
+	$("#container").load("view/book/bookForm.html");
+	
+// 	$("#bookView").attr("style", "display:block");
+//  	$("footer").attr("style", "float:clear both");
+});
+
+</script>
+<script src="js/book/bookForm.js"></script>
+
 
 <!-- Footer -->
 <footer class="w3-center w3-light-grey w3-padding-32">

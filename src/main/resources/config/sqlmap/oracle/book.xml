@@ -2,7 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.easybook.repository.mapper.BookMapper">
-		
+
+<!-- ===================== 예약정보 ===================== -->
+<!-- 예약정보저장 -->	
 <insert id="insertBook" parameterType="bookVO">
 	   	insert into tb_book(
 		   	no, 
@@ -23,22 +25,44 @@
 		    #{roomName},
 		    #{bookDate}
 		)    
- </insert>
+</insert>
  
- <resultMap type="roomInfoVO" id="roomInfoMap">
+<!-- ===================== 방정보 ===================== -->
+<resultMap type="roomInfoVO" id="roomInfoMap">
  	<result property="no" column="no"/>
  	<result property="imgSavePath" column="img_save_path"/>
  	<result property="maxHeadCnt" column="max_head_cnt"/>
  	<result property="name" column="name"/>
- </resultMap>
+</resultMap>
  
-  <select id="selectRoomInfo" parameterType="string" resultMap="roomInfoMap">
+ <!-- 라디오버튼으로 선택한 방정보 가져오기  -->
+<select id="selectRoomInfo" parameterType="string" resultMap="roomInfoMap">
  	select * 
  	from tb_room_info
  	where name = #{name} 
- </select>
+</select>
+
+
+
+<!-- ===================== 통계 ===================== -->
+
+<!-- 통계정보 저장하기 -->
+<insert id="insertStatistic" parameterType="statisticVO">
+	insert into tb_statistic(
+		no,
+		book_room_name,
+		use_time,
+		book_date
+	)
+	values (
+		s_tb_statistic_no.nextVal,
+		#{bookRoomName},
+		#{useDate},
+		#{bookDate}
+	)
 	
 	
+</insert>
 </mapper>
 
 

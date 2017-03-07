@@ -13,7 +13,8 @@ public class BookServiceImpl implements BookService{
 	@Autowired
 	BookMapper mapper;
 	public boolean regBook(BookVO bookVO, StatisticVO statisticVO) {
-		return	mapper.insertBook(bookVO);
+			mapper.insertBook(bookVO);
+			mapper.
 	}
 	public RoomInfoVO retriveRoomInfo(String name) {
 		return mapper.selectRoomInfo(name);

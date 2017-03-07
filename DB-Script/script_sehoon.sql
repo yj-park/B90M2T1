@@ -26,7 +26,7 @@ insert into tb_room_info (	no,
 							img_save_path,
 							max_head_cnt,
 							name ) 
-					values( s_room_info_no.nextVal(),
+					values( s_room_info_no.nextVal,
 							'/mini2-team1/img/a.jpg',
 							6,
 							'a'
