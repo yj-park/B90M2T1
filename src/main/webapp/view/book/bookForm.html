@@ -6,17 +6,17 @@
 		</div>
 		<div id="rChoose">
 			<form id="rForm">
-				<h4>ㄴ.시간선택</h4>
+				<h5>ㄴ.시간선택</h5>
 				<select id="startTime" name="startTime">
 				</select>
 				<select id="endTime" name="endTime">
 				</select>
 				<button id="timeChk"type="button">예약시간 확인</button>
-				<h4>ㄷ.예약자정보</h4>
+				<h5>ㄷ.예약자정보</h5>
 				<input type="text" name="memberId" placeholder="아이디입력">
-				<h4>숫자만 입력해주세요.</h4>
+				<h5>숫자만 입력해주세요.</h5>
 				<input type="text" name="memberMobileNo" placeholder="전화번호 입력">
-				<h4>ㄹ.방선택</h4>
+				<h5>ㄹ.방선택</h5>
 				<input type="radio" id="roomA" name="roomName" value="a">
 				<label for="roomA">A</label>
 				<input type="radio" id="roomB" name="roomName" value="b">
@@ -29,8 +29,9 @@
 				<label for="roomA">E</label>
 				<input type="radio" id="roomF" name="roomName" value="f">
 				<label for="roomA">F</label>
+				<h5>ㅁ.인원수</h5>
+				<input type="number" name="headCnt" id="headCnt" step="1" max="10" min="1">
 				<hr>
-				<br>
 				<button>예약</button>
 			</form>
 		</div>
@@ -93,7 +94,7 @@
 			$.ajax({
 				url : "book/timeCheck.do",
 				data : {
-						"bookDate" :  "20170307",
+						"bookDate" :  "20170308",
 						"bookStartTime" : $("#rForm > [name=startTime]").val(), 
 						"bookEndTime" : $("#rForm > [name=endTime]").val(),
 						},
@@ -135,17 +136,35 @@
 				alert("방을 선택해 주세요");
 				return false; 
 			}
-			alert("예약체크 완료");
+			$.ajax({
+				url : "book/roomTimeCheck.do",
+				data : {
+						"bookDate" :  "20170308",
+						"bookStartTime" : $("#rForm > [name=startTime]").val(), 
+						"bookEndTime" : $("#rForm > [name=endTime]").val(),
+						},
+				dataType : "json"
+			})
+			.done(function (result) {
+				if(result.length === 0) {
+					alert("예약체크 완료");
+				}
+				else {
+					alert("예약가능한 시간을 선택해 주세요");
+					return false;
+				}
+			})
 			
 			$.ajax({
 				url: "book/book.do",
 				data: {	
-						"bookDate" : new Date(),
+						"bookDate" : "20170308",
 						"bookStartTime" : $("#rForm > [name=startTime]").val(),
 						"bookEndTime" : $("#rForm > [name=endTime]").val(),
 						"memberId" : $("#rForm > [name=memberId]").val(),
 						"mobileNo" : $("#rForm > [name=memberMobileNo]").val(),
-						"roomName" : $("input:checked").val()
+						"roomName" : $("input:checked").val(),
+						"headCnt" : $("#rForm > [name=headCnt]").val()
 				},
 				dataType : "text"
 			})

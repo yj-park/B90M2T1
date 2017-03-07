@@ -37,7 +37,7 @@
 		    room_name,
 		    book_date
 		) values (
-		    s_tb_book_no.nextVal(),
+		    s_book_no.nextVal,
 		    #{memberId},
 		    #{mobileNo},
 		    #{headCnt},
@@ -76,9 +76,9 @@
 		book_date
 	)
 	values (
-		s_tb_statistic_no.nextVal,
+		s_statistic_no.nextVal,
 		#{bookRoomName},
-		#{useDate},
+		#{useTime},
 		#{bookDate}
 	)
 	
