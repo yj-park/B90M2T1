@@ -13,65 +13,66 @@
 	</resultMap>
 	
     <!-- 회원가입 -->
-    <insert id="insertMem">
+    <insert id="insertMem" parameterType="memberVO">
     	insert into tb_member(
     		id,
     		password,
-    		name,
-    		mobile_no
+    		name
     	) values (
     		#{id},
     		#{password},
-    		#{name},
-    		#{mobileNo}    		
+    		#{name}
     	)
     </insert>
-
     
-	<!-- 사이트 내 로그인 -->
+<!-- 	사이트 내 로그인
     <select id="innerLogin" parameterType="memberVO" resultMap="memberMap">
     	select *
     	  from tb_member
     	 where id = #{id}
     	   and password = #{password}
     </select>
-    <!-- 소셜 로그인 -->
+    소셜 로그인
     <select id="outerLogin" parameterType="memberVO" resultMap="memberMap">
     	select *
     	  from tb_member
     	 where id = #{id}
-    </select>
+    </select> -->
     
     
-    <!-- 회원정보 상세조회 -->
+    <!-- 회원정보조회 -->
     <select id="selectMemInfo" parameterType="string" resultType="memberVO">
     	select *
     	  from tb_member
-    	 where id = #{id}
+    	  where id = #{id}
+    	  and password = #{password}
     </select>
     
     
     <!-- 회원정보 수정 -->
     <update id="updateMemInfo" parameterType="memberVO">
     	update tb_member
+    	
     	   set password = #{password},
     	   	   mobile_no = #{mobileNo}
     	 where id = #{id}
     </update>
     
     
+    <!-- member 가입 여부 조회 -->
+    <select id="selectMemId" parameterType="string" resultType="string">
+		select id 
+		  from tb_member
+		 where id = #{id}
+	</select>
+	
+	
     <!-- 예약정보 조회 
     <select id="selectMemReservInfo" >
     </select>
     -->
     
     <!-- 
-    member 아이디 중복 조회
-    <select id="selectMemIdList" parameterType="string" resultType="string">
-		select id 
-		  from tb_member
-		 where id = #{id}
-	</select>
 	
 	회원가입한 member 조회
 	<select id="selectMemList" parameterType="string" resultType="member">

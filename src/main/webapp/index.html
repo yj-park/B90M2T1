@@ -3,17 +3,13 @@
 <title>Easy Book</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="google-signin-scope" content="profile email">
-<meta name="google-signin-client_id" content="17394844799-g14bsmpn7ucaidhjfhhvgcjhit18lsv0.apps.googleusercontent.com">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
-<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="css/bookForm.css"/>
 <link rel="stylesheet" href="css/memberLoginForm.css"/>
 <link rel="stylesheet" href="css/memberJoinForm.css"/>
+<link rel="stylesheet" href="css/memberInfo.css">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <script src="js/jquery-3.1.1.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <body>
 
@@ -31,6 +27,7 @@
       <a id="memLogin" class="w3-bar-item w3-button" >로그인</a>
       <a id="memJoin" class="w3-bar-item w3-button w3-margin-right" >회원가입</a>
       <a id="memInfo" class="w3-bar-item w3-button w3-margin-right" style="display: none">마이페이지</a>
+      <a id="memLogout" class="w3-bar-item w3-button" style="display: none" onclick="signOut();" >로그아웃</a>
      
     </div>
   </div>
@@ -57,9 +54,12 @@ $("#memLogin").click(function () {
 $("#memJoin").click(function () {
 	$("#container").load("view/member/memberJoinForm.html");
 });
+$("#memInfo").click(function () {
+	$("#container").load("view/member/memberInfo.html");
+});
+
 
 </script>
-<script src="https://apis.google.com/js/api:client.js"></script>
 
 <!-- Footer -->
 <footer class="w3-center w3-light-grey w3-padding-32">

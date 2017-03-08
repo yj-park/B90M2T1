@@ -1,6 +1,8 @@
+<meta name="google-signin-client_id" content="17394844799-g14bsmpn7ucaidhjfhhvgcjhit18lsv0.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+
 <div class="wrap">
-	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
-		
 	<div id="content" class="product">
 		<div class="proList">
 	    	<div class="option">
@@ -20,9 +22,7 @@
 					SNS 계정으로 간편 로그인
 					<br>
 					<br>
-					<div id="googleLogin" class="sns">
-						<img src="img/member/btn_google_signin.png">
-					</div>
+					<div class="g-signin2" data-onsuccess="onSignIn"></div>
 			    </form>
 		    </div>
 			</div>
@@ -39,15 +39,16 @@ $("#btnLogin").click(function () {
 		dataType: "json",
 		data: {
 			id: $("#id").val(),
-			password: $("#password").val(),
+			password: $("#password").val()
 		}
-	}).done(function(result) {
-		console.log(result);
-		if(result.loginChk){
+	}).done(function(msg) {
+		console.log(msg);
+		if(msg == "Hello"){
 			alert("로그인 성공!");
 			$("#memLogin").attr("style", "display:none");
 			$("#memJoin").attr("style", "display:none");
 			$("#memInfo").attr("style", "display:block");
+			$("#memLogout").attr("style", "display:block");
 			$("#container").load("view/main/main.html");
 		}
 		else {
@@ -55,5 +56,38 @@ $("#btnLogin").click(function () {
 		}
 	})
 });
+
+// 구글 연동 로그인 회원 정보 얻어오기
+function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+  
+  alert("로그인 성공!");
+	$("#memLogin").attr("style", "display:none");
+	$("#memJoin").attr("style", "display:none");
+	$("#memInfo").attr("style", "display:block");
+	$("#memLogout").attr("style", "display:block");
+	$("#container").load("view/main/main.html");
+}
+
+// 구글 연동 로그아웃
+function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    console.log(auth2);
+    auth2.signOut().then(function () {
+    console.log('User signed out.');
+    
+    alert("로그아웃 성공!");
+    $("#memLogin").attr("style", "display:block");
+	$("#memJoin").attr("style", "display:block");
+	$("#memInfo").attr("style", "display:none");
+	$("#memLogout").attr("style", "display:none");
+    $("#container").load("view/main/main.html");
+    
+    });
+  }
 
 </script>

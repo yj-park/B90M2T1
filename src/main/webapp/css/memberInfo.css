@@ -1,7 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<style>
+@CHARSET "UTF-8";
+
 	h3{
 		text-align: left  !important;
     }
@@ -36,25 +34,3 @@
 	  border-top-left-radius: 0;
 	  border-top-right-radius: 0;
 	}
-</style>
-</head>
-<body>
-
-	<div id="content" >
-	<form name="dForm" onsubmit="return delChk();">
-    		<input type="hidden" name="delFeedNo" id="delFeedNo"/>
-	<table class="table table-hover" style="width: 70%; margin-top: 50px; margin-left: 150px; ">
-	</table>
-		</form>
-    
-<script>
-
-if($("#msg").val() != "") {
-	swal($("#msg").val());
-}
-
-</script>    
-    
-	</div>
-</body>
-</html>

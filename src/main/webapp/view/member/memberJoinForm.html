@@ -7,23 +7,17 @@
 			    <form class="form-signin" id="frm" >
 			    	<input type="hidden" id="msg" value="${msg}" />       
 				    <h2 class="form-signin-heading">회원가입</h2>
-				    <input type="text" class="form-control" name="id" id="id" maxlength="20" placeholder="아이디 입력" required="" autofocus="" />
+				    <input type="email" class="form-control" name="id" id="id" maxlength="20" placeholder="아이디 입력" required="" autofocus="" />
+				    <div id="idChkResult"></div>
 				    <input type="password" class="form-control" name="pass" id="pass" maxlength="16" placeholder="비밀번호 입력" required=""/>      
 				    <input type="password" class="form-control" name="passchk" id="passchk" maxlength="16" placeholder="비밀번호 확인" required=""/>   
 				    <input type="text" class="form-control" name="name" id="name" maxlength="18" placeholder="이름 입력" required="" autofocus="" />   
-				    <input type="email" class="form-control" name="email" id="email" maxlength="25" placeholder="이메일 입력" required="" autofocus="" />   
 					<br>
 					<br>
-				    <button class="btn btn-lg btn-primary btn-block" type="submit" id="btnJoin">회원가입</button>
+				    <button class="btn btn-lg btn-primary btn-block" id="btnJoin">회원가입</button>
 				    <br>
-					
-					<hr>
-					SNS 계정으로 간편 회원가입
 					<br>
 					<br>
-					<div id="googleJoin" class="sns">
-     					<img src="img/member/btn_google_signin.png">
-     				</div>
 			    </form>
 		    	</div>
 			</div>
@@ -32,45 +26,51 @@
 </div>
 
 <script>
-//회원가입 저장
+// 아이디(이메일)중복 검사
+$("#id").on("keyup",function(){
+	console.log($("#id"));
+	$.ajax({
+		url : "member/memIdChk.do",
+		type:"POST",
+		data :{ id: $("#id").val()},
+		dataType : "json"
+	})
+	.done(function (result) {
+		console.log(result)
+		if(result.idCheck){
+			$("#idChkResult").html("사용중인 아이디입니다");
+		}
+		else {$("#idChkResult").html("사용가능한 아이디입니다");}
+	})
+})
+
+
+
+//회원가입 
 $("#btnJoin").click(function () {
 	$.ajax ({
-		url: "membJoin.do",
+		url: "member/memJoin.do",
 		method: "post",
 		data: {
 			id: $("#id").val(),
-			pass: $("#pass").val(),
+			password: $("#pass").val(),
 			passchk: $("#passchk").val(),
-			name: $("#name").val(),
-			email: $("#email").val()
-		} ,
+			name: $("#name").val()
+		},
 		dataType: "json"
+	}).done(function (msg) {
+		console.log(msg);
+		if (msg == "Success") {
+			alert("이미 가입한 아이디입니다.");
+			return false;
+		}
+		alert("회원가입이 완료되었습니다.");
+		$("#container").load("view/main/main.html");
 	})
 });
 
-// 아이디 중복 체크
-/*$(function(){
-	var checkAjaxSetTimeout;
-    $('#id').keyup(function(){
-        if ( $('#id').val().length > 6) {
-            var id = $(this).val();
-            // ajax 실행
-            $.ajax({
-                type : "POST",
-                url : "memberJoinForm.do",
-                data: {id: id},
-                success : function(result) {
-                    //console.log(result);
-                    if (result) {
-                        alert ("사용 가능한 아이디 입니다.");
-                    } else {
-                        alert ("사용 불가능한 아이디 입니다.");
-                    }
-                }
-            }); // end ajax
-        }
-    }); // end keyup
-});*/
+
+
 </script>
 
 

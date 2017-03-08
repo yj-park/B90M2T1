@@ -6,14 +6,22 @@ import org.springframework.stereotype.Service;
 import kr.co.easybook.repository.mapper.MemberMapper;
 import kr.co.easybook.repository.vo.MemberVO;
 
-@Service("memberService")
+@Service
 public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	private MemberMapper memberMapper;
 	
-	@Override
-	public MemberVO innerLogin(MemberVO member) throws Exception {
-		return memberMapper.innerLogin(member);
+	public MemberVO selectMemInfo(MemberVO member) throws Exception {
+		return memberMapper.selectMemInfo(member);
 	}
+	
+	public String selectMemId(String id) throws Exception {
+		return memberMapper.selectMemId(id);
+	}
+	
+	public void insertMem(MemberVO member) throws Exception {
+		memberMapper.insertMem(member);
+	}
+	
 }

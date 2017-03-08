@@ -3,7 +3,6 @@ package kr.co.easybook.member.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,29 +21,54 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	// 로그인 체크
-	@RequestMapping("/memLoginChk.do")
-	public Map<String, Object> memLoginChk(MemberVO member, HttpServletRequest request) throws Exception {
-		
-		Map<String, Object> param = new HashMap<>();
-		/*System.out.println(member.getId());
-		System.out.println(member.getPassword());*/
-		MemberVO mem = memberService.innerLogin(member);
-		
-	/*	System.out.println(mem.getId());*/
-		if (mem != null) {
+	
+		// 아이디(이메일)중복 검사
+		@RequestMapping("/memIdChk.do")
+		public Map<String, Object> memIdChk(String id) throws Exception {
+			System.out.println(id);
 			
-			HttpSession session = request.getSession();
+			String idChk = memberService.selectMemId(id);
+			
+			Map<String, Object> param = new HashMap<>();
+			if (idChk != null) {
+				System.out.println("사용중");
+				param.put("idCheck", true);
+				return param;
+			} else {
+				System.out.println("사용가능");
+				param.put("idCheck", false);
+			}
+			return param;
+		}
+		
+		// 회원가입
+		@RequestMapping("/memJoin.do")
+		public String memJoin(MemberVO member, HttpSession session) throws Exception {
+			MemberVO mem = memberService.selectMemInfo(member);
+			String msg;
+			
+			if (mem == null) {
+				memberService.insertMem(member);
+				msg = "Hello";
+			} else {
+				msg = "Success";
+			}
+			System.out.println(msg);
 			session.setAttribute("mem", mem);
-			
-			param.put("mem", mem);
-			param.put("loginChk", true);
-			
-			return param;
+			return msg;
 		}
-		else {
-			param.put("loginChk", false);
-			return param;
+		// 로그인 체크
+		@RequestMapping("/memLoginChk.do")
+		public String memLoginChk(MemberVO member, HttpSession session) throws Exception {
+			MemberVO mem = memberService.selectMemInfo(member);
+			String msg;
+			
+			msg = "Hello";
+			if (mem == null) {
+				msg = "Join";
+			}
+			session.setAttribute("mem", mem);
+			return msg;
 		}
-	}
+		// 
 }
