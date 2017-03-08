@@ -1,0 +1,49 @@
+<div class="container">
+	<div class="content">
+		<ol class="breadcrumb">
+		  <li><a href="${pageContext.request.contextPath}/main/main.do">Home</a></li>
+		  <li class="active">자유게시판</li>
+		</ol>	
+		
+		<form name="wForm" action='/mini-project2/board/write.do' method='post' enctype="multipart/form-data">
+			<table class="table table-no-border">
+			<tr>
+				<td class="td-txt-right td-wp10">제목</td> 
+			 	<td>
+			 		<div class="form-group">
+			 			<input type='text' name='title' class="form-control input-wp1" />
+			 		</div>
+			 	</td>
+			</tr>
+			<tr>
+				<td class="td-txt-right td-wp10">글쓴이</td>
+			 	<td>
+			 		<div class="form-group">
+			 			<input type='text' name='memberId' class="form-control input-wp5" />
+			 		</div>
+			 	</td>
+			</tr>
+			<tr>
+				<td class="td-txt-right td-wp10">내용</td>
+			 	<td><div class="form-group">
+			 		<textarea name='content' rows='5' cols='70' class="form-control"></textarea>
+			 		</div>
+			 	</td>
+			</tr>
+			<tr>
+				<td class="td-txt-right td-wp10">첨부파일</td>
+			 	<td><div class="form-group">
+			 			<input type="file" name="attachFile" />
+					</div>
+			 	</td>			 			
+			</tr>
+			</table>
+				<div class="row">
+			    <div class="col-md-10"></div>
+			    <div class="col-md-2">
+					<button type="button" onclick="javascript:abc()" >등록</button>
+					<a href='list.do' class="btn btn-info btn-lg">목록</a>
+			    </div>
+			</div>
+		</form>
+	</div>

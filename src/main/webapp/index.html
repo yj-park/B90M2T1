@@ -12,6 +12,10 @@
 <script src="js/jquery-3.1.1.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <body>
 
 <!-- Navbar (sit on top) -->
@@ -23,7 +27,7 @@
    
       <a id="book" class="w3-bar-item w3-button">예약</a>
       <a id="chart" class="w3-bar-item w3-button">예약현황</a>
-      <a href="#menu" class="w3-bar-item w3-button">커뮤니티</a>
+      <a id="comm"  class="w3-bar-item w3-button">커뮤니티</a>
       <a id="location" class="w3-bar-item w3-button ">위치안내</a>
       <a id="memLogin" class="w3-bar-item w3-button" >로그인</a>
       <a id="memJoin" class="w3-bar-item w3-button w3-margin-right" >회원가입</a>
@@ -62,6 +66,10 @@ $("#location").click(function () {
 	$("#container").load("view/location/locationInfo.html");
 });
 
+$("#comm").click(function() {
+	$("#container").load("view/board/list.html");
+	
+});
 
 </script>
 

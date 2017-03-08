@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="kr.co.easybook.repository.mapper.BoardMapper">
+
+	<resultMap id="boardMap" type="boardVO" >
+		<result property="no" column="no"/>
+		<result property="memberId" column="member_id"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="regDate" column="reg_date"/>
+		<result property="viewCnt" column="view_cnt" />
+	</resultMap>
+
+	<!-- 페이징 쿼리 -->
+	<select id="selectBoard" parameterType="searchVO" resultMap="boardMap">
+		
+		select *
+		  from (
+		  		 select rownum rnum, a.*
+		  		 	from(select * 
+		  		 	   from tb_pboard 
+		  			   order by no desc 
+		  			) a 
+		  	   )
+		 where rnum between #{begin} and #{end} 
+	
+	</select>
+	
+	<!-- 전체 게시물 수 -->
+	
+	<select id="selectBoardCount" parameterType="searchVO" resultType="int">
+		select count(*)
+			from tb_pboard
+	</select>
+	
+	<!-- 게시판 디테일 -->
+ 	<select id="selectOneBoard" parameterType="int" resultMap="boardMap">
+		select *
+			from tb_pboard
+			where no = #{no}
+	</select>
+	
+	<!-- 게시판 등록  -->
+	<insert id="insertBoard" parameterType="boardVO" >
+		<selectKey keyProperty="no" order="BEFORE" resultType="int">
+			select s_pboard_no.nextVal from dual
+		</selectKey>
+		insert into tb_pboard (
+			no,
+			title,
+			member_id,
+			content
+		)
+		values(
+			#{no},
+			#{title},
+			#{memberId},
+			#{content}
+		)
+	</insert>
+	
+	<!-- 파일 등록 -->
+	<insert id="insertBoardFile" parameterType="fileVO">
+		insert into tb_file (
+			no,
+			board_no,
+			ori_name,
+			system_name,
+			save_path
+		)
+		values(
+			s_file_no.nextVal,
+			#{boardNo},
+			#{oriName},
+			#{systemName},
+			#{savePath}
+		)
+	</insert>
+	
+	
+	<resultMap type="fileVO" id="fileMap">
+		<result property="no" column="no"/>
+		<result property="systemName" column="system_name"/>
+		<result property="oriName" column="ori_name"/>
+		<result property="savePath" column="save_path"/>
+		<result property="boardNo" column="board_no"/>
+	</resultMap>
+	
+	<!-- 파일 디테일 -->
+	<select id="selectBoardFileByNo" parameterType="int" resultMap="fileMap">
+		select no,
+			   board_no,
+			   ori_name,
+			   system_name,
+			   save_path
+		 from tb_file
+		 where board_no = #{no}
+	</select>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="deleteBoard" parameterType="int">
+		delete
+			from tb_pboard
+			where no = #{no}
+	</delete>
+	
+	
+</mapper>
