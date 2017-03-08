@@ -1,0 +1,76 @@
+<div class="container">
+	<div class="header"></div>
+	<div class="content">
+		<br><br>
+		<hr>		
+		<ul class="nav nav-tabs">
+			  <li class="active" id="receiveTap"><a href="#profile" data-toggle="tab">프로필</a></li>
+			  <li id="sendTap" ><a href="#bookList" data-toggle="tab" >예약 정보</a></li>
+		</ul>
+		<br><br>
+	<div id="myTabContent" class="tab-content">	
+	<div class="tab-pane fade active in" id="profile">
+	<div class="proList">
+			<div class="option">
+				<div class="wrapper">
+				<input type="hidden" id="msg" value="${msg}" />
+					<form class="form-info" method="post" >
+						<h3>아이디</h3> 	
+						<input type="text" class="form-control" name="id" readonly /><br>
+						<h3>이름</h3>
+						<input type="text" class="form-control" name="name" readonly /><br>
+						<h3>비밀번호 변경</h3>
+						<input type="password" class="form-control" name="pass" placeholder="새로운 비밀번호"/><br>
+						<input type="password" class="form-control" name="passChk" placeholder="새로운 비밀번호 확인"/><br>
+						<button class="btn btn-lg btn-primary btn-block" id="btnUpdate">수정</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	
+		
+	<div class="tab-pane fade" id="bookList">
+		<div class="row">
+		    <div class="col-md-10"></div>
+		    <div class="col-md-2" style="text-align: right">
+				전체 <span id="count"></span>건
+		    </div>
+		</div>	
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+				<tr>
+					<th>예약일</th>
+					<th>시작시간</th>
+					<th>종료시간</th>
+					<th>스터디룸</th>
+					<th>예약자명</th>
+					<th>인원수</th>
+					<th>예약상태</th>
+				</tr>
+				</thead>
+				<tbody id="pageTable">
+				</tbody>
+			</table>
+		</div>
+		
+		<nav>
+			<ul class="pagination">
+			</ul>
+		</nav>
+	</div>		
+	</div>
+</div>	
+</div>
+
+
+<script src="js/bookList.js"></script>
+
+
+
