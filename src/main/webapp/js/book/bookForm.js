@@ -36,6 +36,37 @@
 			$("#endTime").html(endHtml);
 		};
 		
+		// 예약시간 체크하기
+		$("#timeChk").click(function () {
+			if($("#rForm > [name=startTime]").val() >= $("#rForm > [name=endTime]").val()) {
+				alert("시작시간과 종료시간을  확인해 주세요");
+				return false;
+			}
+			$.ajax({
+				url : "book/timeCheck.do",
+				data : {
+						"bookDate" :  "20170308",
+						"bookStartTime" : $("#rForm > [name=startTime]").val(), 
+						"bookEndTime" : $("#rForm > [name=endTime]").val(),
+						},
+				dataType : "json"
+			})
+			.done(function (result) {
+				if(result.length === 0) {
+					alert("모든방 예약이 가능합니다.");
+				}
+				else {
+					console.dir(result);
+					var html = "";
+					for(i = 0; i < result.length; i++) {
+						html += "<h6>" + result[i].roomName + " : " + result[i].bookStartTime + "-" + result[i].bookEndTime + "</h6>";
+					}
+					$("#bottom").html(html);
+				}
+			})
+		}); 
+		
+		
 		/*form submit 이벤트발생시  */
 		$("#rForm").submit(function () {
 			var rf = $("#rForm");
@@ -56,38 +87,56 @@
 				alert("방을 선택해 주세요");
 				return false; 
 			}
-			alert("예약체크 완료");
+			$.ajax({
+				url : "book/roomTimeCheck.do",
+				data : {
+						"bookDate" :  "20170308",
+						"bookStartTime" : $("#rForm > [name=startTime]").val(), 
+						"bookEndTime" : $("#rForm > [name=endTime]").val(),
+						},
+				dataType : "json"
+			})
+			.done(function (result) {
+				if(result.length === 0) {
+					alert("예약체크 완료");
+				}
+				else {
+					alert("예약가능한 시간을 선택해 주세요");
+					return false;
+				}
+			})
 			
 			$.ajax({
-				url: "book.do",
-				data: {
+				url: "book/book.do",
+				data: {	
+						"bookDate" : "20170308",
 						"bookStartTime" : $("#rForm > [name=startTime]").val(),
 						"bookEndTime" : $("#rForm > [name=endTime]").val(),
 						"memberId" : $("#rForm > [name=memberId]").val(),
 						"mobileNo" : $("#rForm > [name=memberMobileNo]").val(),
-						"roomName" : $("input:checked").val()
+						"roomName" : $("input:checked").val(),
+						"headCnt" : $("#rForm > [name=headCnt]").val()
 				},
 				dataType : "text"
 			})
 			.done(function(result) {
 				alert(result);
-			})
+			});
 			return false;
 		});
-
+		
+		
 		/* 방 라디오버튼 클릭시 이미지 보여주기 */
 		$("input[type=radio]").on("click", function () { 
-			console.log("라디오버튼클릭됨")
 			var room = $(this).val();
 			$.ajax({
 				url: "book/roomInfo.do",
 				data: {"roomName": room},
-				dataType: "text"
+				dataType: "json"
 				})
 			.done(function(result) {
 				$("#roomSpecInfo").attr("src", result.imgSavePath);
 			});
-			
 		});
 		
 		
@@ -96,13 +145,14 @@
 			$.ajax({
 				url: "book/roomInfo.do",
 				data: {"roomName": room},
-				dataType: "text"
+				dataType: "json"
 				})
 			.done(function(result) {
 				console.log(result.imgSavePath);
 				$("#roomReservationInfo").attr("src", result.imgSavePath);
 			});
 		}
-		
+		makeSelect();
+		structInfo("r");
 		// 페이지 로딩시 방구조 이미지  ajax 호출
 //		structInfo("roomstruct");
