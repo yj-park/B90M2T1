@@ -4,163 +4,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<link rel="stylesheet" href="../../css/calendar.css" type="text/css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-<style>
-@import "compass/css3";
 
-/* frame */
-#testDatepicker {
-  position: absolute;
-  width: 350px;
-  height: 0;
-  margin: auto;
-  display: table;
-  box-shadow: 0 0 0 1px #656D78;
-}
-
-/* CALENDAR */
-#testDatepicker .ui-datepicker {
-  position: relative;
-  width: 350px;
-  padding: 0; margin: 0;
-  border-radius: 0;
-  border: 0;
-  background: transparent;
-  display: table-cell;
-  vertical-align: middle;
-  font-family: 'Helvetica', Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* CALENDAR HEADER */
-#testDatepicker .ui-datepicker-header {
-  position: relative;
-  height: 50px;
-  padding: 0; margin: 0;
-  border-radius: 0;
-  border: 0;
-  background: transparent;
-}
-
-/* HEADER PREV/NEXT */
-#testDatepicker .ui-datepicker-prev,
-#testDatepicker .ui-datepicker-next {
-  cursor: pointer;
-  position: absolute;
-  top: 0; bottom: 0;
-  width: 50px; height: 50px;
-  margin: auto;
-  border-radius: 0;
-  background: #FFF;
-  -webkit-transition: background .3s ease-in-out;
-}
-#testDatepicker .ui-datepicker-prev { left: 0; }
-#testDatepicker .ui-datepicker-next { right: 0; }
-#testDatepicker .ui-datepicker-prev:hover,
-#testDatepicker .ui-datepicker-next:hover {
-  border: 0;
-  background: #656D78;
-}
-
-/* HEADER PREV/NEXT ARROWS */
-#testDatepicker .ui-datepicker-prev .ui-icon,
-#testDatepicker .ui-datepicker-next .ui-icon {
-  position: absolute;
-  top: 0; left: 4px; right: 0; bottom: 0;
-  width: 8px; height: 8px;
-  margin: auto;
-  border-width: 1px 0 0 1px;
-  border-style: solid;
-  border-color: #434A54;
-  background: transparent;
-  -webkit-transition: border-color .3s ease-in-out;
-  -webkit-transform: rotate(-45deg);
-}
-#testDatepicker .ui-datepicker-next .ui-icon {
-  left: -4px;
-  border-width: 1px 1px 0 0;
-  -webkit-transform: rotate(45deg);
-}
-#testDatepicker .ui-datepicker-prev:hover .ui-icon,
-#testDatepicker.ui-datepicker-next:hover .ui-icon {
-  border-color: #FFF;
-}
-
-/* HEADER TITLE */
-#testDatepicker .ui-datepicker-title {
-  cursor: default;
-  position: relative;
-  width: 250px; height: 50px;
-  padding: 0; margin: auto;
-  background: #434A54;
-  color: #FFF;
-  line-height: 50px;
-}
-
-/* WEEKDAYS */
-#testDatepicker .ui-datepicker-calendar { margin: 0; }
-#testDatepicker .ui-datepicker-calendar thead th {
-  cursor: default;
-  height: 50px;
-  padding: 0;
-  background: #656D78;
-  color: #FFF;
-  line-height: 50px;
-  text-transform: uppercase;
-}
-
-/* WEEKENDS */
-#testDatepicker .ui-datepicker-calendar thead th.ui-datepicker-week-end { background: #434A54; color: #FFF; }
-#testDatepicker .ui-datepicker-calendar tbody td { padding: 0; margin: 0; }
-#testDatepicker .ui-datepicker-calendar tbody td.ui-datepicker-week-end { background: #FFF; }
-#testDatepicker .ui-datepicker-calendar tbody td a.ui-state-default {
-  width: 50px; height: 50px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  -webkit-transition: background .3s ease-in-out,
-                      color .3s ease-in-out;
-  
-  color: #434A54;
-  text-align: center;
-  line-height: 50px;
-}
-
-/* DAY HOVER */
-#testDatepicker .ui-datepicker-calendar tbody td a.ui-state-default:hover,
-#testDatepicker .ui-datepicker-calendar tbody td a.ui-state-active {
-  background: #656D78;
-  color: #FFF;
-}
-
-/* NO DAYS */
-.ui-datepicker-week-end.ui-datepicker-other-month.ui-datepicker-unselectable.ui-state-disabled .ui-state-default{
-  width: 50px; height: 50px;
-  padding: 0;
-  border: 0;
-  -webkit-transition: background .3s ease-in-out, color .3s ease-in-out;
-  text-align: center;
-  line-height: 50px;
-}
-.ui-datepicker-other-month.ui-datepicker-unselectable.ui-state-disabled .ui-state-default {
-  width: 50px; height: 50px;
-  padding: 0;
-  border: 0;
-  -webkit-transition: background .3s ease-in-out, color .3s ease-in-out;
-  text-align: center;
-  line-height: 50px;
-}
-
-.ui-datepicker-unselectable.ui-state-disabled .ui-state-default {
-  width: 50px; height: 50px;
-  padding: 0;
-  border: 0;
-  -webkit-transition: background .3s ease-in-out, color .3s ease-in-out;
-  text-align: center;
-  line-height: 50px;
-}
-</style>	
 	<script>
 	$(function() {
 	    $( "#testDatepicker" ).datepicker({
@@ -176,7 +23,7 @@
 			dayNamesShort: ['일','월','화','수','목','금','토'],
 			dayNamesMin: ['일','월','화','수','목','금','토'],
 			weekHeader: 'Wk',
-			dateFormat: 'yy-mm-dd',
+			dateFormat: 'yymmdd',
 			firstDay: 0,
 			isRTL: false,
 			showMonthAfterYear: true,
@@ -192,13 +39,8 @@
 	});
 
 	function EvtChangeMonthYear(dateText) {
-		var arrSplit = ($("#testDatepicker").val()).split("-");
-		var year = arrSplit[0];
-		var month = arrSplit[1];
-		var date = arrSplit[2];
-		console.log(year);
-		console.log(month);
-		console.log(date);
+		console.log($("#testDatepicker").val());
+
 	}
 	
 	
