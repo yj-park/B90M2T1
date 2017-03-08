@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <script src="js/jquery-3.1.1.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 <body>
 
 <!-- Navbar (sit on top) -->
@@ -23,7 +24,7 @@
       <a id="book" class="w3-bar-item w3-button">예약</a>
       <a id="chart" class="w3-bar-item w3-button">예약현황</a>
       <a href="#menu" class="w3-bar-item w3-button">커뮤니티</a>
-      <a href="location/locationInfo.do" class="w3-bar-item w3-button ">위치안내</a>
+      <a href="location" class="w3-bar-item w3-button ">위치안내</a>
       <a id="memLogin" class="w3-bar-item w3-button" >로그인</a>
       <a id="memJoin" class="w3-bar-item w3-button w3-margin-right" >회원가입</a>
       <a id="memInfo" class="w3-bar-item w3-button w3-margin-right" style="display: none">마이페이지</a>
@@ -56,6 +57,9 @@ $("#memJoin").click(function () {
 });
 $("#memInfo").click(function () {
 	$("#container").load("view/member/memberInfo.html");
+});
+$("#location").click(function () {
+	$("#container").load("view/location/locationInfo.html");
 });
 
 
