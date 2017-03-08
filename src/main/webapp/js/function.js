@@ -174,6 +174,35 @@ function updateFormPage(modNo) {
 	});
 }
 
+function pageUpdate() {
+	
+	var no = $("[name=no]").val();
+	var title = $("[name=title]").val();
+	var memberId = $("[name=memberId]").val();
+	var content = $("[name=content").val();
+	
+	console.log(memberId);
+	
+	/*fd.append("no", $("[name=no]").val());
+	fd.append("title", $("[name=title]").val());
+	fd.append("memberId", $("[name=memberId]").val());
+	fd.append("content", $("[name=content").val());*/
+	
+	$.ajax({
+		url: "/mini2-team1/board/update.do",
+		data: {
+			"no" : no,
+			"title" : title,
+			"memberId" : memberId,
+			"content" : content
+		} 		
+	})
+	.done(function() {
+		alert("수정되었습니다.");
+		$("#container").load("view/board/list.html");
+	})
+}
+
 pageList();
 
 

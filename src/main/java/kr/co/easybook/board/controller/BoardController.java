@@ -1,9 +1,9 @@
 package kr.co.easybook.board.controller;
 
+import java.util.HashMap;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -117,13 +117,18 @@ public class BoardController {
 	
 	@RequestMapping("board/updateForm.do")
 	public Map<String, Object> updateForm(int no) throws Exception {
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> result = new HashMap<>();
 		result.put("board", service.updateForm(no));
 		return result;
 	}
 	
 	@RequestMapping("board/update.do")
-	public String update(BoardVO board) throws Exception {
+	public String update(int no, String title, String memberId, String content) throws Exception {
+		BoardVO board = new BoardVO();
+		board.setNo(no);
+		board.setTitle(title);
+		board.setMemberId(memberId);
+		board.setContent(content);
 		service.update(board);
 		return null;
 	}

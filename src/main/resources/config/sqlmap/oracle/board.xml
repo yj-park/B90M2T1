@@ -106,5 +106,12 @@
 			where no = #{no}
 	</delete>
 	
+	<!-- 게시물 수정 -->
+	<update id="updateBoard" parameterType="boardVO">
+		update tb_pboard
+			set title = #{title},
+				content = #{content}
+			where no = #{no}
+	</update>
 	
 </mapper>
