@@ -96,7 +96,7 @@ function calendar() {
 					for(i = 0; i < result.length; i++) {
 						html += "<h6>" + result[i].roomName + " : " + result[i].bookStartTime + "-" + result[i].bookEndTime + "</h6>";
 					}
-					$("#bottom").html(html);
+					$("#centerArea > #timeSheet").html(html);
 				}
 			})
 		}); 
