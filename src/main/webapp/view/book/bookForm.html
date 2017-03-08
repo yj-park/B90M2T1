@@ -1,22 +1,21 @@
 <div id="bookView" class="view">
 	<p id="brief"></p>
 	<div id="leftArea"> 
-		<div id="calendar">
-			
-		</div>
+			<p>ㄱ. 날짜선택</p>
+		<div id="datePicker"></div>
 		<div id="rChoose">
 			<form id="rForm">
-				<h5>ㄴ.시간선택</h5>
+				<p>ㄴ.시간선택</p>
 				<select id="startTime" name="startTime">
 				</select>
 				<select id="endTime" name="endTime">
 				</select>
 				<button id="timeChk"type="button">예약시간 확인</button>
-				<h5>ㄷ.예약자정보</h5>
+				<p>ㄷ.예약자정보</p>
 				<input type="text" name="memberId" placeholder="아이디입력">
-				<h5>숫자만 입력해주세요.</h5>
+				<p>숫자만 입력해주세요.</p>
 				<input type="text" name="memberMobileNo" placeholder="전화번호 입력">
-				<h5>ㄹ.방선택</h5>
+				<p>ㄹ.방선택</p>
 				<input type="radio" id="roomA" name="roomName" value="a">
 				<label for="roomA">A</label>
 				<input type="radio" id="roomB" name="roomName" value="b">
@@ -29,7 +28,7 @@
 				<label for="roomA">E</label>
 				<input type="radio" id="roomF" name="roomName" value="f">
 				<label for="roomA">F</label>
-				<h5>ㅁ.인원수</h5>
+				<p>ㅁ.인원수</p>
 				<input type="number" name="headCnt" id="headCnt" step="1" max="10" min="1">
 				<hr>
 				<button>예약</button>

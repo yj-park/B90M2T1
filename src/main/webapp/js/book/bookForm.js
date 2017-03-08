@@ -1,11 +1,46 @@
 /**
  * bookForm.html에 연결할 js 파일 
  */	
+/*날짜선택달력 생성*/
+function calendar() {
+	    $("#datePicker").datepicker({
+	    	closeText: '닫기',
+			prevText: '이전달',
+			nextText: '다음달',
+			currentText: '오늘',
+			monthNames: ['1월','2월','3월','4월','5월','6월',
+			'7월','8월','9월','10월','11월','12월'],
+			monthNamesShort: ['1월','2월','3월','4월','5월','6월',
+			'7월','8월','9월','10월','11월','12월'],
+			dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'],
+			dayNamesShort: ['일','월','화','수','목','금','토'],
+			dayNamesMin: ['일','월','화','수','목','금','토'],
+			weekHeader: 'Wk',
+			dateFormat: 'yymmdd',
+			firstDay: 0,
+			isRTL: false,
+			showMonthAfterYear: true,
+			showOtherMonths: true,
+			yearSuffix: '년',
+			minDate: new Date(),
+			yearRange: 'c-99:c+99',
+			onSelect: function (dateText) {
+				EvtChangeMonthYear(dateText)
+			}
+	    
+	    });
+	}
+
+	function EvtChangeMonthYear(dateText) {
+		console.log($("#datePicker").val());
+
+	}
+
 
 /* 셀렉트박스 옵션값 넣기  */
-		var first = 10;
-		var last = 24;
 		function makeSelect() {
+			var first = 10;
+			var last = 24;
 			var startHtml = "";
 			var endHtml = "";
 			for(i = first; i <= last; i++) {
@@ -45,7 +80,7 @@
 			$.ajax({
 				url : "book/timeCheck.do",
 				data : {
-						"bookDate" :  "20170308",
+						"bookDate" :  $("#datePicker").val(),
 						"bookStartTime" : $("#rForm > [name=startTime]").val(), 
 						"bookEndTime" : $("#rForm > [name=endTime]").val(),
 						},
@@ -90,7 +125,7 @@
 			$.ajax({
 				url : "book/roomTimeCheck.do",
 				data : {
-						"bookDate" :  "20170308",
+						"bookDate" :  $("#datePicker").val(),
 						"bookStartTime" : $("#rForm > [name=startTime]").val(), 
 						"bookEndTime" : $("#rForm > [name=endTime]").val(),
 						},
@@ -109,7 +144,7 @@
 			$.ajax({
 				url: "book/book.do",
 				data: {	
-						"bookDate" : "20170308",
+						"bookDate" : $("#datePicker").val(),
 						"bookStartTime" : $("#rForm > [name=startTime]").val(),
 						"bookEndTime" : $("#rForm > [name=endTime]").val(),
 						"memberId" : $("#rForm > [name=memberId]").val(),
@@ -152,6 +187,7 @@
 				$("#roomReservationInfo").attr("src", result.imgSavePath);
 			});
 		}
+		calendar();
 		makeSelect();
 		structInfo("r");
 		// 페이지 로딩시 방구조 이미지  ajax 호출

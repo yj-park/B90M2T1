@@ -31,14 +31,6 @@ public class BookController {
 	
 	@RequestMapping("/timeCheck.do")
 	public List<BookVO> bookTimeCheck(BookVO bookVO) {
-		/*BookVO bookVO = new BookVO();
-		System.out.println(request.getParameter("bookDate"));
-		System.out.println(request.getParameter("bookStartTime"));
-		System.out.println(request.getParameter("bookEndTime"));
-		bookVO.setBookDate(request.getParameter("bookDate"));
-		bookVO.setBookStartTime(Integer.parseInt(request.getParameter("bookStartTime")));
-		bookVO.setBookEndTime(Integer.parseInt(request.getParameter("bookEndTime")));*/
-		
 		System.out.println(bookVO.getBookStartTime());
 		System.out.println(bookVO.getBookEndTime());
 		System.out.println(bookVO.getBookDate());
