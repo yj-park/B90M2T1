@@ -1,8 +1,7 @@
 @CHARSET "UTF-8";
-@import "compass/css3";
 
 /* frame */
-#testDatepicker {
+#datePicker {
   position: absolute;
   width: 350px;
   height: 0;
@@ -12,7 +11,7 @@
 }
 
 /* CALENDAR */
-#testDatepicker .ui-datepicker {
+#datePicker .ui-datepicker {
   position: relative;
   width: 350px;
   padding: 0; margin: 0;
@@ -26,7 +25,7 @@
 }
 
 /* CALENDAR HEADER */
-#testDatepicker .ui-datepicker-header {
+#datePicker .ui-datepicker-header {
   position: relative;
   height: 50px;
   padding: 0; margin: 0;
@@ -36,8 +35,8 @@
 }
 
 /* HEADER PREV/NEXT */
-#testDatepicker .ui-datepicker-prev,
-#testDatepicker .ui-datepicker-next {
+#datePicker .ui-datepicker-prev,
+#datePicker .ui-datepicker-next {
   cursor: pointer;
   position: absolute;
   top: 0; bottom: 0;
@@ -47,17 +46,17 @@
   background: #FFF;
   -webkit-transition: background .3s ease-in-out;
 }
-#testDatepicker .ui-datepicker-prev { left: 0; }
-#testDatepicker .ui-datepicker-next { right: 0; }
-#testDatepicker .ui-datepicker-prev:hover,
-#testDatepicker .ui-datepicker-next:hover {
+#datePicker .ui-datepicker-prev { left: 0; }
+#datePicker .ui-datepicker-next { right: 0; }
+#datePicker .ui-datepicker-prev:hover,
+#datePicker .ui-datepicker-next:hover {
   border: 0;
   background: #656D78;
 }
 
 /* HEADER PREV/NEXT ARROWS */
-#testDatepicker .ui-datepicker-prev .ui-icon,
-#testDatepicker .ui-datepicker-next .ui-icon {
+#datePicker .ui-datepicker-prev .ui-icon,
+#datePicker .ui-datepicker-next .ui-icon {
   position: absolute;
   top: 0; left: 4px; right: 0; bottom: 0;
   width: 8px; height: 8px;
@@ -69,18 +68,18 @@
   -webkit-transition: border-color .3s ease-in-out;
   -webkit-transform: rotate(-45deg);
 }
-#testDatepicker .ui-datepicker-next .ui-icon {
+#datePicker .ui-datepicker-next .ui-icon {
   left: -4px;
   border-width: 1px 1px 0 0;
   -webkit-transform: rotate(45deg);
 }
-#testDatepicker .ui-datepicker-prev:hover .ui-icon,
-#testDatepicker.ui-datepicker-next:hover .ui-icon {
+#datePicker .ui-datepicker-prev:hover .ui-icon,
+#datePicker.ui-datepicker-next:hover .ui-icon {
   border-color: #FFF;
 }
 
 /* HEADER TITLE */
-#testDatepicker .ui-datepicker-title {
+#datePicker .ui-datepicker-title {
   cursor: default;
   position: relative;
   width: 250px; height: 50px;
@@ -91,8 +90,8 @@
 }
 
 /* WEEKDAYS */
-#testDatepicker .ui-datepicker-calendar { margin: 0; }
-#testDatepicker .ui-datepicker-calendar thead th {
+#datePicker .ui-datepicker-calendar { margin: 0; }
+#datePicker .ui-datepicker-calendar thead th {
   cursor: default;
   height: 50px;
   padding: 0;
@@ -103,10 +102,10 @@
 }
 
 /* WEEKENDS */
-#testDatepicker .ui-datepicker-calendar thead th.ui-datepicker-week-end { background: #434A54; color: #FFF; }
-#testDatepicker .ui-datepicker-calendar tbody td { padding: 0; margin: 0; }
-#testDatepicker .ui-datepicker-calendar tbody td.ui-datepicker-week-end { background: #FFF; }
-#testDatepicker .ui-datepicker-calendar tbody td a.ui-state-default {
+#datePicker .ui-datepicker-calendar thead th.ui-datepicker-week-end { background: #434A54; color: #FFF; }
+#datePicker .ui-datepicker-calendar tbody td { padding: 0; margin: 0; }
+#datePicker .ui-datepicker-calendar tbody td.ui-datepicker-week-end { background: #FFF; }
+#datePicker .ui-datepicker-calendar tbody td a.ui-state-default {
   width: 50px; height: 50px;
   padding: 0;
   border: 0;
@@ -120,8 +119,8 @@
 }
 
 /* DAY HOVER */
-#testDatepicker .ui-datepicker-calendar tbody td a.ui-state-default:hover,
-#testDatepicker .ui-datepicker-calendar tbody td a.ui-state-active {
+#datePicker .ui-datepicker-calendar tbody td a.ui-state-default:hover,
+#datePicker .ui-datepicker-calendar tbody td a.ui-state-active {
   background: #656D78;
   color: #FFF;
 }
