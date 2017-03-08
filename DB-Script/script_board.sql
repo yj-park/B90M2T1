@@ -1,5 +1,5 @@
 ============= 게시판 테이블 =====================================
-create table tb_board (
+create table tb_pboard (
   no number(10) primary key,
   member_id varchar2(50) not null,
   title varchar2(100) not null,
@@ -8,14 +8,14 @@ create table tb_board (
   reg_date date default sysdate not null
 );
 
-desc tb_board;
+desc tb_pboard;
 
-create sequence s_board_no;
+create sequence s_pboard_no;
 
-insert into tb_board (no, member_id, title, content)
-values(s_board_no.nextVal, '티모', '안녕하세요', '티모입니다');
+insert into tb_pboard (no, member_id, title, content)
+values(s_pboard_no.nextVal, '티모', '안녕하세요', '티모입니다');
 
-select * from tb_board;
+select * from tb_pboard;
 
 ===========================================================
 
