@@ -20,7 +20,7 @@
 		  from (
 		  		 select rownum rnum, a.*
 		  		 	from(select * 
-		  		 	   from tb_pboard 
+		  		 	   from tb_board 
 		  			   order by no desc 
 		  			) a 
 		  	   )
@@ -32,22 +32,22 @@
 	
 	<select id="selectBoardCount" parameterType="searchVO" resultType="int">
 		select count(*)
-			from tb_pboard
+			from tb_board
 	</select>
 	
 	<!-- 게시판 디테일 -->
  	<select id="selectOneBoard" parameterType="int" resultMap="boardMap">
 		select *
-			from tb_pboard
+			from tb_board
 			where no = #{no}
 	</select>
 	
 	<!-- 게시판 등록  -->
 	<insert id="insertBoard" parameterType="boardVO" >
 		<selectKey keyProperty="no" order="BEFORE" resultType="int">
-			select s_pboard_no.nextVal from dual
+			select s_board_no.nextVal from dual
 		</selectKey>
-		insert into tb_pboard (
+		insert into tb_board (
 			no,
 			title,
 			member_id,
@@ -102,16 +102,32 @@
 	<!-- 게시물 삭제 -->
 	<delete id="deleteBoard" parameterType="int">
 		delete
-			from tb_pboard
+			from tb_board
 			where no = #{no}
 	</delete>
 	
 	<!-- 게시물 수정 -->
 	<update id="updateBoard" parameterType="boardVO">
-		update tb_pboard
+		update tb_board
 			set title = #{title},
 				content = #{content}
 			where no = #{no}
 	</update>
+	
+	
+	<resultMap id="commentMap" type="commentVO">
+		<result property="no" column="no" />
+		<result property="boardNo" column="board_no" />
+		<result property="memberId" column="member_id" />
+		<result property="content" column="content" />
+		<result property="regDate" column="reg_date" />
+	</resultMap>
+	
+	<select id="selectBoardCommentByNo" parameterType="int" resultMap="commentMap">
+		select *
+			from tb_comment
+			where boardNo = {no}
+			order by no
+	</select>
 	
 </mapper>
