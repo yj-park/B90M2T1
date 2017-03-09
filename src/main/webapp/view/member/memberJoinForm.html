@@ -9,9 +9,10 @@
 				    <h2 class="form-signin-heading">회원가입</h2>
 				    <input type="email" class="form-control" name="id" id="id" maxlength="20" placeholder="아이디 입력" required="" autofocus="" />
 				    <div id="idChkResult"></div>
+				    <br>
+				    <input type="text" class="form-control" name="name" id="name" maxlength="18" placeholder="이름 입력" required="" autofocus="" />   
 				    <input type="password" class="form-control" name="pass" id="pass" maxlength="16" placeholder="비밀번호 입력" required=""/>      
 				    <input type="password" class="form-control" name="passchk" id="passchk" maxlength="16" placeholder="비밀번호 확인" required=""/>   
-				    <input type="text" class="form-control" name="name" id="name" maxlength="18" placeholder="이름 입력" required="" autofocus="" />   
 					<br>
 					<br>
 				    <button class="btn btn-lg btn-primary btn-block" id="btnJoin">회원가입</button>
@@ -26,13 +27,23 @@
 </div>
 
 <script>
+$(function() {
+	alert("2")
+	var type = localStorage.getItem("type");
+	
+	if(type == "google") {
+		googleMemJoin();
+	}
+})
 // 아이디(이메일)중복 검사
 $("#id").on("keyup",function(){
 	console.log($("#id"));
 	$.ajax({
 		url : "member/memIdChk.do",
 		type:"POST",
-		data :{ id: $("#id").val()},
+		data :{ 
+			"id": $("#id").val()
+		},
 		dataType : "json"
 	})
 	.done(function (result) {
@@ -52,10 +63,10 @@ $("#btnJoin").click(function () {
 		url: "member/memJoin.do",
 		method: "post",
 		data: {
-			id: $("#id").val(),
-			password: $("#pass").val(),
-			passchk: $("#passchk").val(),
-			name: $("#name").val()
+			"id": $("#id").val(),
+			"password": $("#pass").val(),
+			"passchk": $("#passchk").val(),
+			"name": $("#name").val()
 		},
 		dataType: "json"
 	}).done(function (msg) {
@@ -70,6 +81,37 @@ $("#btnJoin").click(function () {
 });
 
 
+
+//구글 연동 회원가입
+function googleMemJoin(){
+	
+	alert("3")
+	console.log(localStorage.getItem("id"))
+	var id = localStorage.getItem("id");
+	$("#id").val(id);
+	var name = localStorage.getItem("name");
+	$("#name").val(name);
+	
+	$.ajax ({
+		url: "member/googleMemJoin.do",
+		type: "POST",
+		dataType: "json",
+		data: {
+			"id": id,
+			"name": name,
+			"password": $("pass").val(),
+			"passchk": $("#passchk").val()
+		}
+	}).done (function (msg) {
+		console.log(msg);
+		if (msg == "Success") {
+			alert("이미 가입한 아이디입니다.");
+			return false;
+		}
+		alert("회원가입이 완료되었습니다.");
+		$("#container").load("view/main/main.html");
+	})
+};
 
 </script>
 

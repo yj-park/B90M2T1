@@ -41,7 +41,7 @@ public class MemberController {
 			return param;
 		}
 		
-		// 회원가입
+		// 일반 회원가입
 		@RequestMapping("/memJoin.do")
 		public String memJoin(MemberVO member, HttpSession session) throws Exception {
 			MemberVO mem = memberService.selectMemInfo(member);
@@ -57,6 +57,25 @@ public class MemberController {
 			session.setAttribute("mem", mem);
 			return msg;
 		}
+		
+		// 구글 회원가입
+		@RequestMapping("/googleMemJoin.do")
+		public String googleMemJoin(MemberVO member, HttpSession session) throws Exception {
+			MemberVO mem = memberService.selectMemInfo(member);
+			String msg;
+			
+			if (mem == null) {
+				memberService.insertMem(member);
+				msg = "Hello";
+			} else {
+				msg = "Success";
+			}
+			System.out.println(msg);
+			session.setAttribute("mem", mem);
+			return msg;
+		}
+		
+		
 		// 로그인 체크
 		@RequestMapping("/memLoginChk.do")
 		public String memLoginChk(MemberVO member, HttpSession session) throws Exception {
@@ -70,5 +89,23 @@ public class MemberController {
 			session.setAttribute("mem", mem);
 			return msg;
 		}
-		// 
+		
+		// 구글 로그인 DB 저장
+		@RequestMapping("/memGoogleChk.do")
+		public Map<String, Object> memGoogleChk(String id) throws Exception {
+			System.out.println(id);
+			
+			String googleIdChk = memberService.selectMemId(id);
+			
+			Map<String, Object> param = new HashMap<>();
+			if (googleIdChk != null) {
+				System.out.println("사용중");
+				param.put("googleIdChk", true);
+				return param;
+			} else {
+				System.out.println("사용가능");
+				param.put("googleIdChk", false);
+			}
+			return param;
+		}
 }
