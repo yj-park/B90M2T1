@@ -24,10 +24,18 @@ public class BookController {
 	BookService bookService;
 	
 	@RequestMapping("/getUserInfo.do")
-	public MemberVO getUserInfo(HttpSession session) {
+	public Map<String, Object> getUserInfo(HttpSession session) {
 		MemberVO member = (MemberVO)session.getAttribute("mem");
-		System.out.println(member.getId());
-		return member;
+		Map<String, Object> map = new HashMap<>();
+		if(member != null) {
+			System.out.println(member.getId());
+			map.put("msg", true);
+			map.put("member", member);
+		}
+		else {
+			map.put("msg", false);
+		}
+		return map;
 	}
 	
 	@RequestMapping("/roomInfo.do")

@@ -107,7 +107,7 @@ function calendar() {
 		
 		/*form submit 이벤트발생시  */
 		$("#rForm").submit(function () {
-			getUserInfo;
+			getUserInfo();
 			if($("#rForm > [name=startTime]").val() >= $("#rForm > [name=endTime]").val()) {
 				alert("예약종료시간을 확인해 주세요");
 				return false;
@@ -184,9 +184,10 @@ function calendar() {
 			})
 			.done(function (result) {
 				if(result.msg) {
-					 $("#rForm > [name=memberId]").val(result.id);
+					$("#rForm > [name=memberId]").val(result.member.id);
 				}
 				else {
+					$("#rForm > [name=memberId]").val("");
 					alert("예약을 위해 로그인해 주세요!");
 					return false;
 				}
