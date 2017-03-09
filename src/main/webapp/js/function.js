@@ -181,13 +181,6 @@ function pageUpdate() {
 	var memberId = $("[name=memberId]").val();
 	var content = $("[name=content").val();
 	
-	console.log(memberId);
-	
-	/*fd.append("no", $("[name=no]").val());
-	fd.append("title", $("[name=title]").val());
-	fd.append("memberId", $("[name=memberId]").val());
-	fd.append("content", $("[name=content").val());*/
-	
 	$.ajax({
 		url: "/mini2-team1/board/update.do",
 		data: {
