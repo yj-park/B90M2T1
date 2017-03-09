@@ -1,7 +1,5 @@
 package kr.co.easybook.book.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,16 +42,31 @@ public class BookController {
 		}
 		return list;
 	}
+	/*
+	 * @RequestMapping("/roomTimeCheck.do")
+	public boolean roomTimeCheck(BookVO bookVO) {
+		System.out.println("예약확인:방");
+		System.out.println(bookVO.getBookStartTime());
+		System.out.println(bookVO.getBookEndTime());
+		System.out.println(bookVO.getBookDate());
+		System.out.println(bookVO.getRoomName());
+		boolean booking = bookService.checkBookRoom(bookVO);
+		System.out.println("예약 가능여부 : " + booking);
+		return booking;
+	}
+	*/
 	
 	@RequestMapping("/book.do")
-	public Map<String, Object> book(BookVO book) {
-		Map<String, Object> map = new HashMap<>();
-//		통계정보 저장
+	public Map<String,Object> book(BookVO book) {
+		System.out.println(book.getMobileNo());
+		//		통계정보 저장
 		StatisticVO statistic = new StatisticVO();
 		statistic.setUseTime(book.getBookEndTime() - book.getBookStartTime());
 		statistic.setBookRoomName(book.getRoomName());
 		statistic.setBookDate(book.getBookDate());
-		bookService.regBook(book, statistic);
+		boolean check = bookService.regBook(book, statistic);
+		Map<String , Object> map = new HashMap<>();
+		map.put("msg", check);
 		return map;
 		
 	}

@@ -88,7 +88,9 @@ function calendar() {
 			})
 			.done(function (result) {
 				if(result.length === 0) {
+					$("#centerArea > #timeSheet").html("");
 					alert("모든방 예약이 가능합니다.");
+					
 				}
 				else {
 					console.dir(result);
@@ -96,6 +98,7 @@ function calendar() {
 					for(i = 0; i < result.length; i++) {
 						html += "<h6>" + result[i].roomName + " : " + result[i].bookStartTime + "-" + result[i].bookEndTime + "</h6>";
 					}
+					alert("선택한 시간의 예약현황을 확인해 주세요.");
 					$("#centerArea > #timeSheet").html(html);
 				}
 			})
@@ -105,7 +108,6 @@ function calendar() {
 		/*form submit 이벤트발생시  */
 		$("#rForm").submit(function () {
 			var rf = $("#rForm");
-			console.log($("#rForm > [name=memberId]").val());
 			if($("#rForm > [name=startTime]").val() >= $("#rForm > [name=endTime]").val()) {
 				alert("예약종료시간을 확인해 주세요");
 				return false;
@@ -122,27 +124,10 @@ function calendar() {
 				alert("방을 선택해 주세요");
 				return false; 
 			}
-			$.ajax({
-				url : "book/roomTimeCheck.do",
-				data : {
-						"bookDate" :  $("#datePicker").val(),
-						"bookStartTime" : $("#rForm > [name=startTime]").val(), 
-						"bookEndTime" : $("#rForm > [name=endTime]").val(),
-						},
-				dataType : "json"
-			})
-			.done(function (result) {
-				if(result.length === 0) {
-					alert("예약체크 완료");
-				}
-				else {
-					alert("예약가능한 시간을 선택해 주세요");
-					return false;
-				}
-			})
 			
 			$.ajax({
 				url: "book/book.do",
+				type: "POST",
 				data: {	
 						"bookDate" : $("#datePicker").val(),
 						"bookStartTime" : $("#rForm > [name=startTime]").val(),
@@ -152,10 +137,13 @@ function calendar() {
 						"roomName" : $("input:checked").val(),
 						"headCnt" : $("#rForm > [name=headCnt]").val()
 				},
-				dataType : "text"
+				dataType : "json"
 			})
 			.done(function(result) {
-				alert(result);
+				if(result.msg) {
+					alert("예약되었습니다.");
+				}
+				else alert("예약에 실패했습니다.시간을 확인해 주세요");
 			});
 			return false;
 		});
@@ -170,7 +158,8 @@ function calendar() {
 				dataType: "json"
 				})
 			.done(function(result) {
-				$("#roomSpecInfo").attr("src", result.imgSavePath);
+				$("#roomImg").attr("src", result.imgSavePath);
+				$("#roomInfo").html("<hr><h3>스터디룸 : " + result.name + "룸 / 정원 : " + result.maxHeadCnt + "</h3>");
 			});
 		});
 		

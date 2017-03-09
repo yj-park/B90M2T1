@@ -12,22 +12,25 @@
 				</select>
 				<button id="timeChk"type="button">예약시간 확인</button>
 				<p>ㄷ.예약자정보</p>
-				<input type="text" name="memberId" placeholder="아이디입력">
-				<p>숫자만 입력해주세요.</p>
-				<input type="text" name="memberMobileNo" placeholder="전화번호 입력">
+				아이디&nbsp&nbsp&nbsp
+				<input type="text" name="memberId" placeholder="아이디"><br>
+				전화번호
+				<input type="text" name="memberMobileNo" placeholder="숫자만 입력해주세요.">
 				<p>ㄹ.방선택</p>
 				<input type="radio" id="roomA" name="roomName" value="a">
-				<label for="roomA">A</label>
+				<label for="roomA">a</label>
 				<input type="radio" id="roomB" name="roomName" value="b">
-				<label for="roomA">B</label>
+				<label for="roomB">b</label>
 				<input type="radio" id="roomC" name="roomName" value="c">
-				<label for="roomA">C</label>
+				<label for="roomC">c</label>
 				<input type="radio" id="roomD" name="roomName" value="d">
-				<label for="roomA">D</label>
+				<label for="roomD">d</label>
 				<input type="radio" id="roomE" name="roomName" value="e">
-				<label for="roomA">E</label>
+				<label for="roomE">e</label>
 				<input type="radio" id="roomF" name="roomName" value="f">
-				<label for="roomA">F</label>
+				<label for="roomF">f</label>
+				<input type="radio" id="roomG" name="roomName" value="g">
+				<label for="roomG">g</label>
 				<p>ㅁ.인원수</p>
 				<input type="number" name="headCnt" id="headCnt" step="1" max="10" min="1">
 				<hr>
@@ -37,12 +40,14 @@
 	</div>
 	<div id="centerArea">
 		<img id="roomReservationInfo" width="500px" height="400px"/>
+		<hr>
 		<p><예약현황></p>
 		<div id="timeSheet"></div>
 	</div>
 	
 	<div id="rightArea">
-		<img id="roomSpecInfo" width="300px" height="400px"/>
+		<img id="roomImg" width="300px" height="400px"/>
+		<div id="roomInfo"></div>
 	</div>
 	<div id="bottom">
 	</div>

@@ -8,6 +8,7 @@ import kr.co.easybook.repository.vo.StatisticVO;
 
 public interface BookMapper {
 	public List<BookVO> selectBookTime(BookVO bookVO);
+	public int selectRoomCheck(BookVO bookVO);
 	public int insertBook(BookVO bookVO);
 	public RoomInfoVO selectRoomInfo(String name);
 	public int insertStatistic(StatisticVO statistic);

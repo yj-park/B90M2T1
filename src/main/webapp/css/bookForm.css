@@ -156,17 +156,28 @@
 		float: left;
 	}
 	
-	#centerArea {
+#centerArea {
 		float: left;
 		padding-left: 50px;
 		padding-top: 50px;
 	}
-	#rightArea {
+#rightArea {
 		padding-left: 50px;
 		float: left;
 		padding-top: 50px;
 	}
-	#bottom {
-		padding-top: 50px;
+#bottom {
 		clear: both;
 	}
+#container {
+		width: 90%;
+		margin: 0 auto;
+	}
+#timeSheet {
+	border: 1px solid grey;
+	height: 200px;
+	overflow-y: auto;
+}
+footer {
+	height: 100px;
+}

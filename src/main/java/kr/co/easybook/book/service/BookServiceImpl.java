@@ -17,13 +17,25 @@ public class BookServiceImpl implements BookService{
 	public List<BookVO> checkBookTime(BookVO bookVO) {
 		return mapper.selectBookTime(bookVO);
 	}
+	public boolean checkBookRoom(BookVO bookVO) {
+		if(mapper.selectRoomCheck(bookVO) > 0) {
+			return false;
+		}
+		return true;
+	}
 	public boolean regBook(BookVO bookVO, StatisticVO statisticVO) {
+		int cnt = mapper.selectRoomCheck(bookVO);
+		System.out.println(cnt);
+		if(cnt > 0) {
+				return false;
+			}
 			int bookResult = mapper.insertBook(bookVO);
 			int statisticResult = mapper.insertStatistic(statisticVO);
 			if(bookResult == 1 && statisticResult == 1) {
 				return true;
 			}
-			else return false; 
+			
+			return false; 
 	}
 	public RoomInfoVO retriveRoomInfo(String name) {
 		return mapper.selectRoomInfo(name);

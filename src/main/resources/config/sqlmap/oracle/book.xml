@@ -24,6 +24,19 @@
 		  or (book_start_time >= #{bookStartTime} and book_end_time <= #{bookEndTime}))
 		  
 		 ]]>
+	order by room_name
+</select> 
+<!-- 방별 예약시간 체크하기 -->
+<select id="selectRoomCheck" parameterType="bookVO" resultType="int">
+	select count(*)
+	from tb_book
+	where book_date = #{bookDate} 
+		  and room_name = #{roomName} <![CDATA[
+		  and ((book_start_time <= #{bookStartTime} and book_end_time > #{bookStartTime}) 
+		  or (book_start_time < #{bookEndTime} and book_end_time > #{bookEndTime})
+		  or (book_start_time >= #{bookStartTime} and book_end_time <= #{bookEndTime}))
+		  
+		 ]]>
 </select> 
 <!-- 예약정보저장 -->	
 <insert id="insertBook" parameterType="bookVO">
