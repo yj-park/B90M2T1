@@ -24,7 +24,7 @@ $("#btnLogin").click(function () {
 	}).done(function(msg) {
 		console.log(msg);
 		if(msg == "Hello"){
-			alert("로그인 성공!");
+			swal("로그인 성공!");
 			$("#memLogin").attr("style", "display:none");
 			$("#memJoin").attr("style", "display:none");
 			$("#memInfo").attr("style", "display:block");
@@ -32,7 +32,7 @@ $("#btnLogin").click(function () {
 			$("#container").load("view/main/main.html");
 		}
 		else {
-			alert("아이디 또는 비밀번호를 확인해주세요");
+			swal("아이디 또는 비밀번호를 확인해주세요");
 		}
 	})
 });
@@ -54,7 +54,7 @@ function onSignIn(googleUser) {
 	  }
   }).done (function (result){
 	  if(result.googleIdChk){
-		  alert("구글 로그인 성공!");
+		  swal("구글 로그인 성공!");
 		  $("#memLogin").attr("style", "display:none");
 		  $("#memJoin").attr("style", "display:none");
 		  $("#memInfo").attr("style", "display:block");
@@ -62,7 +62,7 @@ function onSignIn(googleUser) {
 		  $("#container").load("view/main/main.html");
 	  }
 	  else {
-		  alert("추가 정보 입력을 위해 회원가입 페이지로 이동!");
+		  swal("추가 정보 입력을 위해 회원가입 페이지로 이동!");
 // 		  $("#container").load("view/member/memberJoinForm.html?id="+profile.getEmail()+"&name="+profile.getName()+" );
 		  $("#container").load("view/member/memberJoinForm.html");
 		  localStorage.setItem("id", profile.getEmail());
@@ -79,7 +79,7 @@ function signOut() {
     auth2.signOut().then(function () {
     console.log('User signed out.');
     
-    alert("로그아웃 성공!");
+    swal("로그아웃 성공!");
     $("#memLogin").attr("style", "display:block");
 	$("#memJoin").attr("style", "display:block");
 	$("#memInfo").attr("style", "display:none");

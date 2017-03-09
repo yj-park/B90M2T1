@@ -35,10 +35,10 @@ function googleMemJoin(){
 	}).done (function (msg) {
 		console.log(msg);
 		if (msg == "Success") {
-			alert("이미 가입한 아이디입니다.");
+			swal("이미 가입한 아이디입니다.");
 			return false;
 		}
-		alert("회원가입이 완료되었습니다.");
+		swal("회원가입이 완료되었습니다.");
 		$("#container").load("view/main/main.html");
 	})
 };
@@ -83,12 +83,11 @@ $("#btnJoin").click(function () {
 	}).done(function (msg) {
 		console.log(msg);
 		if (msg == "Success") {
-			alert("이미 가입한 아이디입니다.");
+			swal("이미 가입한 아이디입니다.");
 			return false;
 		}
-		alert("회원가입이 완료되었습니다.");
+		swal("회원가입이 완료되었습니다.");
 		$("#container").load("view/main/main.html");
 	})
 });
-
 
