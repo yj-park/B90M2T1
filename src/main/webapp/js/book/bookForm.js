@@ -71,8 +71,17 @@ function calendar() {
 			$("#endTime").html(endHtml);
 		};
 		
+		//선택시간확인버튼 클릭시 예약정보가져오기		
+		$("#selectTimeChk").click(timeChk); 
+		//모든예약확인버튼 클릭시 예약정보가져오기		
+		$("#allTimeChk").click(function () {
+			$("#rForm > [name=startTime]").val(10);
+			$("#rForm > [name=endTime]").val(24); 
+			timeChk();
+		}); 
+		
 		// 예약시간 체크하기
-		$("#timeChk").click(function () {
+		function timeChk() {
 			if($("#rForm > [name=startTime]").val() >= $("#rForm > [name=endTime]").val()) {
 				swal("시작시간과 종료시간을  확인해 주세요");
 				return false;
@@ -98,11 +107,11 @@ function calendar() {
 					for(i = 0; i < result.length; i++) {
 						html += "<p>" + result[i].roomName + "룸 : " + result[i].bookStartTime + "시 - " + result[i].bookEndTime + "시 </p>";
 					}
-					swal("선택한 시간의 예약현황을 확인해 주세요.");
+					swal("예약된방정보를 확인해 주세요.");
 					$("#centerArea > #timeSheet").html(html);
 				}
 			})
-		}); 
+		}
 		
 		
 		/*form submit 이벤트발생시  */
