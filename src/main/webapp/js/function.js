@@ -98,25 +98,23 @@ function makePageLink(data) {
 
 // 세부사항과 관련된 함수들
 function detail(no) {
-	console.log("디테일 no = " + no);
 	pageDetail(no);
 }
 
 function pageDetail(no){
-	console.log("ajax no = " + no);
+	
 	$.ajax({
 		url: "/mini2-team1/board/detail.do",
 		dataType: "json",
 		data : {no : no}
 	})
 	.done(function(result) {
-		console.log(result);
-		board = result.boardVO
-		console.log(board);
+		board = result.boardVO;
 		$("div#container").load("view/board/detail.html");
-		
+		commentList(board.no);
 	});
 }
+
 
 // 글쓰기와 관련된 함수들
 function writeInfo() {
@@ -196,7 +194,71 @@ function pageUpdate() {
 	})
 }
 
+function commentList(no) {
+	
+	$.ajax({
+		url: "/mini2-team1/board/commentList.do",
+		data: {"no" : no},
+		dataType: "json"
+	})
+	.done(makeCommentList)
+}
+
+function makeCommentList(result) {
+	console.log(result);
+	var html = "";
+	html += '<table class="table table-hover table-bordered">';
+	html += '	<colgroup>'; 
+	html += '		<col width="7%">'; 
+	html += '		<col width="*">'; 
+	html += '		<col width="14%">'; 
+	html += '		<col width="10%">'; 
+	html += '	</colgroup>'; 
+ 
+	for (var i = 0; i < result.length; i++) {
+		var comment = result[i];
+		html += '<tr id="row' + comment.no + '">';
+		html += '	<td>' + comment.memberId + '</td>';
+		html += '	<td>' + comment.content + '</td>';
+		var date = new Date(comment.regDate);
+		var time = date.getFullYear() + "-" 
+		         + (date.getMonth() + 1) + "-" 
+		         + date.getDate() + " "
+		         + date.getHours() + ":"
+		         + date.getMinutes() + ":"
+		         + date.getSeconds();
+		html += '	<td>' + time + '</td>';  
+		html += '	<td>';    
+		html += '		<a href="javascript:commentUpdateForm(' + comment.no + ')" class="btn btn-success btn-sm" role="button">수정</a>';    
+		html += '		<a href="javascript:commentDelete(' + comment.no + ')" class="btn btn-danger btn-sm" role="button">삭제</a>';    
+		html += '	</td>';    
+		html += '</tr>';
+	}
+	if (result.length == undefined) {
+		html += '<td colspan="4">댓글이 존재하지 않습니다.</td>';
+	}
+	$("#container").append(html);
+}
+
+function commentWrite() {
+	var no = board.no;
+	var memberId = $("[name=memberId]").val();
+	var content = $("[name=content]").val();
+	
+	$.ajax({
+		url: "/mini2-team1/board/commentRegister.do",
+		type: "POST",
+		data: {
+			"no" : no,
+			"memberId" : memberId,
+			"content" : content
+		}
+	})
+	.done(function() {
+		alert("댓글이 등록되었습니다.");
+	})
+
+}
+
 pageList();
-
-
 

@@ -1,6 +1,7 @@
 package kr.co.easybook.board.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.easybook.repository.mapper.BoardMapper;
 import kr.co.easybook.repository.vo.BoardVO;
+import kr.co.easybook.repository.vo.CommentVO;
 import kr.co.easybook.repository.vo.FileVO;
 import kr.co.easybook.repository.vo.PageResultVO;
 import kr.co.easybook.repository.vo.SearchVO;
@@ -67,10 +69,9 @@ public class BoardServiceImpl implements BoardService {
 		return dao.selectBoardCommentByNo(comment.getNo());
 	}
 */
-/*	@Override
-	public List<CommentVO> commentRegist(CommentVO comment) throws Exception {
+	@Override
+	public void commentRegist(CommentVO comment) throws Exception {
 		dao.insertBoardComment(comment);
-		return dao.selectBoardCommentByNo(comment.getNo());
 	}
 
 	@Override
@@ -78,7 +79,7 @@ public class BoardServiceImpl implements BoardService {
 		return dao.selectBoardCommentByNo(no);
 	}
 
-	@Override
+	/*@Override
 	public List<CommentVO> commentDelete(CommentVO comment) throws Exception {
 		dao.deleteBoardComment(comment.getNo());
 		return dao.selectBoardCommentByNo(comment.getNo());

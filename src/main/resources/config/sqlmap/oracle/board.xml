@@ -126,8 +126,13 @@
 	<select id="selectBoardCommentByNo" parameterType="int" resultMap="commentMap">
 		select *
 			from tb_comment
-			where boardNo = {no}
+			where board_No = #{boardNo}
 			order by no
 	</select>
+	
+	<insert id="insertBoardComment" parameterType="commentVO">
+		insert into tb_comment (no, board_no, member_id, content )
+		values(s_comment_no.nextVal, #{boardNo}, #{memberId}, #{content} )
+	</insert>
 	
 </mapper>

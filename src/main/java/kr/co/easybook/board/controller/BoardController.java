@@ -1,9 +1,10 @@
 package kr.co.easybook.board.controller;
 
-import java.util.HashMap;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.easybook.board.service.BoardService;
 import kr.co.easybook.repository.vo.BoardVO;
+import kr.co.easybook.repository.vo.CommentVO;
 import kr.co.easybook.repository.vo.FileVO;
 import kr.co.easybook.repository.vo.SearchVO;
 
@@ -44,6 +46,7 @@ public class BoardController {
 	@RequestMapping("board/detail.do")
 	@ResponseBody
 	public Map<String, Object> detail(int no) throws Exception {
+		System.out.println(no);
 		Map<String, Object> map = service.detail(no);
 		Map<String, Object> result = new HashMap<String, Object>();
 		
@@ -55,6 +58,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("board/write.do")
+	@ResponseBody
 	public String write(MultipartHttpServletRequest mRequest, RedirectAttributes attr) throws Exception {
 		
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -109,6 +113,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("board/delete.do")
+	@ResponseBody
 	public String delete(int no) throws Exception {
 		
 		service.delete(no);
@@ -116,6 +121,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("board/updateForm.do")
+	@ResponseBody
 	public Map<String, Object> updateForm(int no) throws Exception {
 		Map<String, Object> result = new HashMap<>();
 		result.put("board", service.updateForm(no));
@@ -123,16 +129,32 @@ public class BoardController {
 	}
 	
 	@RequestMapping("board/update.do")
-	public String update(int no, String title, String memberId, String content) throws Exception {
+	@ResponseBody
+	public void update(int no, String title, String memberId, String content) throws Exception {
 		BoardVO board = new BoardVO();
 		board.setNo(no);
 		board.setTitle(title);
 		board.setMemberId(memberId);
 		board.setContent(content);
 		service.update(board);
-		return null;
 	}
 	
+	@RequestMapping("board/commentList.do")
+	@ResponseBody
+	public List<CommentVO> commentList(int no) throws Exception {
+		List<CommentVO> list = service.commentList(no);
+		return list;
+	}
+	
+	@RequestMapping("board/commentRegister.do")
+	@ResponseBody
+	public void commentRegister(int no, String memberId, String content) throws Exception {
+		CommentVO comment = new CommentVO();
+		comment.setBoardNo(no);
+		comment.setMemberId(memberId);
+		comment.setContent(content);
+		service.commentRegist(comment);
+	}
 	
 	public static void main(String[] args) {
 		for (int count = 0; count < 100; count++) {

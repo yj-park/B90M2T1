@@ -18,3 +18,5 @@ var data = {
 var html = template(data);
 
 $("#detail").html(html);
+
+

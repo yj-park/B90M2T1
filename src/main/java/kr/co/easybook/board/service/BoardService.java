@@ -1,8 +1,10 @@
 package kr.co.easybook.board.service;
 
+import java.util.List;
 import java.util.Map;
 
 import kr.co.easybook.repository.vo.BoardVO;
+import kr.co.easybook.repository.vo.CommentVO;
 import kr.co.easybook.repository.vo.SearchVO;
 
 public interface BoardService {
@@ -20,9 +22,9 @@ public interface BoardService {
 	
 //	public List<CommentVO> commentUpdate(CommentVO comment) throws Exception ;
 	
-//	public List<CommentVO> commentRegist(CommentVO comment) throws Exception;
+	public void commentRegist(CommentVO comment) throws Exception;
 	
-//	public List<CommentVO> commentList(int no) throws Exception ;
+	public List<CommentVO> commentList(int no) throws Exception ;
 	
 //	public List<CommentVO> commentDelete(CommentVO comment) throws Exception ;
 
