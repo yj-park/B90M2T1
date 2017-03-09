@@ -35,4 +35,16 @@
 			where member_id = #{memberId}
 	</select>
 	
+	
+	<!-- 예약 삭제 -->
+	<delete id="bookDelete" parameterType="int">
+		delete
+			from tb_book
+			where no = #{no}
+	</delete>
+	
+	
+	
+	
+	
 </mapper> 

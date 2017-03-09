@@ -9,5 +9,5 @@ public interface MemberMapper1 {
 	
 	public List<BoardVO> selectBookList(SearchVO search) throws Exception;
 	public int selectBookCount(SearchVO search) throws Exception;
-	
+	public boolean bookDelete(int no) throws Exception;
 }

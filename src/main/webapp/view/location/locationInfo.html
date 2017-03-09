@@ -110,14 +110,13 @@
 	    <p>
 	    <p id="subContent">
 		    <span><strong>[주소]</strong></span>
-		    <span>우편번호 :&nbsp;06621</span>
-		    <span>신주소 :&nbsp;서울 서초구 강남대로 53길 8 비트아카데미빌딩</span>
-		    <span>지번 :&nbsp;서울 서초구 서초동 1327-15</span>
+		    <span>우편번호 :&nbsp;07345</span>
+		    <span>신주소 :&nbsp;서울 영등포구 63로 50 한화금융센터_63</span>
+		    <span>지번 :&nbsp;서울 영등포구 여의도동 60</span>
 	    </p>
 	    <p id="subContent">
 		    <span><strong>[대표번호]</strong></span>
-		    <span>TEL :&nbsp;02-3468-9600</span>
-		    <span>FAX :&nbsp;02-6007-1245</span>
+		    <span>TEL :&nbsp;02-789-5663</span>
 	    </p>
 	    <p id="subContent">
 		    <span><strong>[영업시간]</strong></span>
@@ -125,13 +124,17 @@
 		    <span>평일, 공휴일 동일 운영</span>
 	    </p>
 	    <p id="subContent">
-		    <span><strong>[교통]</strong></span>
-		    <span>지하철 :&nbsp;2호선 강남역 5번출구 3분거리</span>
+		    <span><strong>[교통 : 지하철]</strong></span>
+		    <span>1호선 대방역 6번출구 앞 여의도 마을버스 11번 이용</span>
+		    <span>5호선 여의도역 5번출구 앞 여의도 마을버스 11번 이용</span>
+		    <span>9호선 샛강역 3번출구 앞 5633, 5534번 이용</span>
 	    </p>
 	    <p id="subContent">
-		    <span><strong>[찾아오시는방법]</strong></span>
-		    <span>강남역 7번 또는 5번 출구로 나와 직진</span>
-		    <span>삼성화재 건물에서 우회전 후 대명스포츠와 춘하추동 사이 길 우측</span>
+		    <span><strong>[교통 : 버스]</strong></span>
+		    <span>간선버스 261번 (장위동 - 여의도)</span>
+		    <span>지선버스 5633번 (노은사도 - 순복음교회)</span>
+		    <span>지선버스 7611번 (홍은동 - 여의도)</span>
+		    <span>여의도 마을버스 11번</span>
 	    </p>
 
     </div>
@@ -173,7 +176,7 @@
 
 			var directionsService = new google.maps.DirectionsService;
 			map = new google.maps.Map(document.getElementById('map'), {
-				center: {lat: 37.494546, lng: 127.028014},
+				center: {lat: 37.519582, lng: 126.940221},
 		    	zoom: 16,
 		    
 			});
@@ -194,20 +197,14 @@
 			  '<h1 id="firstHeading" class="firstHeading">이지북(easybook)</h1>'+
 			  '<div id="bodyContent">'+
 			  '<p><b>주소</b><br>' +
-			  '우편번호 : 06621.<br>' +
-			  '신주소: 서울 서초구 강남대로53길 8 비트아카데미 빌딩.<br>'+
-			  '지번: 서울 서초구 서초동 1327-15. <br>'+
+			  '우편번호 : 07345.<br>' +
+			  '신주소: 서울 영등포구 63로 50 한화금융센터_63.<br>'+
+			  '지번: 서울 영등포구 여의도동 60. <br>'+
 			  '<p><b>대표번호</b><br>' +
-			  'TEL: 02-3468-9600.<br>'+
-			  'FAX: 02-6007-1245. <br>'+
+			  'TEL: 02-789-5663.<br>'+
 			  '<p><b>영업시간</b><br>'+
 			  '10:00 ~ 24:00.<br>'+
 			  '평일, 공휴일 동일 운영. <br>'+
-			  '<p><b>교통</b><br>'+
-			  '지하철 2호선 강남역 5번출구 3분거리<br>'+
-			  '<p><b>찾아오시는방법</b><br>'+
-			  '강남역 7번 또는 5번 출구로 나와 직진.<br> '+
-			  '삼성화재 건물에서 우회전 후 대명스포츠와 춘하추동 사이 길 우측에 위치. <br>'+
 			  '<p>Attribution: easybook, <a href="https://www.easybook.com"></a></p>'+
 			  '</div>'+
 			  '</div>';
@@ -220,7 +217,7 @@
 		  
 	  		//이지북 위치에 마커
 			var marker = new google.maps.Marker({
-				  position: {lat: 37.494546, lng: 127.028014},
+				  position: {lat: 37.519582, lng: 126.940221},
 				  map: map,
 				 title: '이지북(easybook)',
 				 label: 'D'
@@ -250,7 +247,7 @@
 		//
 		function displayRoute(origin, destination, service, display) {
 			  service.route({
-				origin: {lat: 37.494546, lng: 127.028014},  
+				origin: {lat: 37.519582, lng: 126.940221},  
 	 			destination: {lat: userLatitude, lng: userLongitude},
 			    travelMode: google.maps.TravelMode.TRANSIT
 			  }, function(response, status) {
@@ -266,7 +263,7 @@
 		//두 점 사이 경로구하기
 		function calculateAndDisplayRoute(directionsService, directionsDisplay, userLatitude, userLongitude) {
 			directionsService.route({
-			    origin: {lat: 37.494546, lng: 127.028014},  
+			    origin: {lat: 37.519582, lng: 126.940221},  
 			    destination: {lat: userLatitude, lng: userLongitude},
 			    travelMode: google.maps.TravelMode.TRANSIT
 			  }, function(response, status) {

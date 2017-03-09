@@ -21,9 +21,9 @@ public class MyPageController {
 	
 	@RequestMapping("/bookList.do")
 	public Map<String, Object> list(SearchVO search, HttpSession session) throws Exception {
-		System.out.println("hi");
+		//System.out.println("hi");
 		MemberVO member = (MemberVO)session.getAttribute("mem");
-		System.out.println(member);
+		//System.out.println(member);
 		Map<String, Object> map = null;
 		if(member.getId() != "") {
 			search.setMemberId(member.getId());
@@ -39,7 +39,11 @@ public class MyPageController {
 		
 	}
 	
-	
+	@RequestMapping("/bookDelete.do")
+	public String bookDelete(int no) throws Exception {
+		memberService1.bookDelete(no);
+		return "";
+	}
 	
 	
 	

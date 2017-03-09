@@ -22,13 +22,14 @@ function makePageList(result) {
 		var book = result.list[i];
 	
 		html += '<tr>';
+//		html += '	<td>' + book.bookNo + '</td>';
 		html += '	<td>' + book.bookDate + '</td>';
 		html += '	<td>' + book.bookStartTime + '</td>';
 		html += '	<td>' + book.bookEndTime + '</td>';
 		html += '	<td>' + book.roomName + '</td>';
 		html += '	<td>' + book.memberId + '</td>';
 		html += '	<td>' + book.headCnt + '</td>';
-		html += '	<td>예약&nbsp;<button onclick=deleteBook();>x</button></td>';
+		html += '	<td>예약&nbsp;<button onclick=bookDelete(' + book.no + ');>x</button></td>';
 		html += '</tr>';
 	}
 	
@@ -88,6 +89,20 @@ function makePageLink(data) {
 	}
 	
 	$("nav > ul.pagination").html(html);
+}
+
+function bookDelete(no) {
+	console.log(no);
+	$.ajax({
+		url: "/mini2-team1/myPage/bookDelete.do",
+		data: {"no" : no}
+	})
+	.done(function() {
+		alert("예약이 취소되었습니다.");
+//		$("#container").load("view/member/list.html");
+		pageList();
+	});
+	
 }
 
 

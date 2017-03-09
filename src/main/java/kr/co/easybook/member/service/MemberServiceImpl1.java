@@ -23,5 +23,12 @@ public class MemberServiceImpl1 implements MemberService1 {
 		result.put("pageResult", new PageResultVO(search.getPageNo(), memberMapper1.selectBookCount(search)));
 		return result;
 	}
+	
+	@Override
+	public void bookDelete(int no) throws Exception {
+		memberMapper1.bookDelete(no);
+	}
+
+
 
 }
