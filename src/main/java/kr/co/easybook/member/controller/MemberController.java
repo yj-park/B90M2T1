@@ -41,26 +41,9 @@ public class MemberController {
 			return param;
 		}
 		
-		// 일반 회원가입
+		// 회원가입
 		@RequestMapping("/memJoin.do")
 		public String memJoin(MemberVO member, HttpSession session) throws Exception {
-			MemberVO mem = memberService.selectMemInfo(member);
-			String msg;
-			
-			if (mem == null) {
-				memberService.insertMem(member);
-				msg = "Hello";
-			} else {
-				msg = "Success";
-			}
-			System.out.println(msg);
-			session.setAttribute("mem", mem);
-			return msg;
-		}
-		
-		// 구글 회원가입
-		@RequestMapping("/googleMemJoin.do")
-		public String googleMemJoin(MemberVO member, HttpSession session) throws Exception {
 			MemberVO mem = memberService.selectMemInfo(member);
 			String msg;
 			
