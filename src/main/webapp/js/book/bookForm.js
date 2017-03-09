@@ -74,7 +74,7 @@ function calendar() {
 		// 예약시간 체크하기
 		$("#timeChk").click(function () {
 			if($("#rForm > [name=startTime]").val() >= $("#rForm > [name=endTime]").val()) {
-				alert("시작시간과 종료시간을  확인해 주세요");
+				swal("시작시간과 종료시간을  확인해 주세요");
 				return false;
 			}
 			$.ajax({
@@ -89,7 +89,7 @@ function calendar() {
 			.done(function (result) {
 				if(result.length === 0) {
 					$("#centerArea > #timeSheet").html("");
-					alert("모든방 예약이 가능합니다.");
+					swal("모든방 예약이 가능합니다.");
 					
 				}
 				else {
@@ -98,7 +98,7 @@ function calendar() {
 					for(i = 0; i < result.length; i++) {
 						html += "<p>" + result[i].roomName + "룸 : " + result[i].bookStartTime + "시 - " + result[i].bookEndTime + "시 </p>";
 					}
-					alert("선택한 시간의 예약현황을 확인해 주세요.");
+					swal("선택한 시간의 예약현황을 확인해 주세요.");
 					$("#centerArea > #timeSheet").html(html);
 				}
 			})
@@ -109,19 +109,19 @@ function calendar() {
 		$("#rForm").submit(function () {
 			getUserInfo();
 			if($("#rForm > [name=startTime]").val() >= $("#rForm > [name=endTime]").val()) {
-				alert("예약종료시간을 확인해 주세요");
+				swal("예약종료시간을 확인해 주세요");
 				return false;
 			}
 			if($("#rForm > [name=memberId]").val() == ""){
-				alert("예약자 아이디를 입력해 주세요");
+				swal("예약자 아이디를 입력해 주세요");
 				return false;
 			}
 			if($("#rForm > [name=memberMobileNo]").val() == "") {
-				alert("예약자 전화번호를 입력해 주세요");
+				swal("예약자 전화번호를 입력해 주세요");
 				return false;
 			}
 			if($("input:checked").val() == null) {
-				alert("방을 선택해 주세요");
+				swal("방을 선택해 주세요");
 				return false; 
 			}
 			
@@ -141,9 +141,9 @@ function calendar() {
 			})
 			.done(function(result) {
 				if(result.msg) {
-					alert("예약되었습니다.");
+					swal("예약되었습니다.");
 				}
-				else alert("예약에 실패했습니다.시간을 확인해 주세요");
+				else swal("예약에 실패했습니다.시간을 확인해 주세요");
 			});
 			return false;
 		});
@@ -188,7 +188,7 @@ function calendar() {
 				}
 				else {
 					$("#rForm > [name=memberId]").val("");
-					alert("예약을 위해 로그인해 주세요!");
+					swal("예약을 위해 로그인해 주세요!");
 					return false;
 				}
 			}); 
