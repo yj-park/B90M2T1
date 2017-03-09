@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+#chartView {
+	height: 100%;
+	width: 100%;
+	padding-left: 200px;
+}
+#chartView > img {
+	padding-top: 150px;
+	padding-bottom: 250px;
+}
+
+#chart1 {
+	float: left;
+	}
+#chart2 {
+	float: left;
+	}

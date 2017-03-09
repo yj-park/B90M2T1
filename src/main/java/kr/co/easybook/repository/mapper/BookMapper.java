@@ -12,4 +12,6 @@ public interface BookMapper {
 	public int insertBook(BookVO bookVO);
 	public RoomInfoVO selectRoomInfo(String name);
 	public int insertStatistic(StatisticVO statistic);
+	public int selectTotalData(String toDay);
+	public int selectTotalDataByRoom(StatisticVO statisticVO);
 }

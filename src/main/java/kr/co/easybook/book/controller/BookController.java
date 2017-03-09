@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.easybook.book.service.BookService;
 import kr.co.easybook.repository.vo.BookVO;
+import kr.co.easybook.repository.vo.MemberVO;
 import kr.co.easybook.repository.vo.RoomInfoVO;
 import kr.co.easybook.repository.vo.StatisticVO;
 
@@ -20,6 +22,13 @@ import kr.co.easybook.repository.vo.StatisticVO;
 public class BookController {
 	@Autowired
 	BookService bookService;
+	
+	@RequestMapping("/getUserInfo.do")
+	public MemberVO getUserInfo(HttpSession session) {
+		MemberVO member = (MemberVO)session.getAttribute("mem");
+		System.out.println(member.getId());
+		return member;
+	}
 	
 	@RequestMapping("/roomInfo.do")
 	public RoomInfoVO roomInfo(HttpServletRequest request) {

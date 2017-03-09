@@ -94,9 +94,20 @@
 		#{useTime},
 		#{bookDate}
 	)
-	
-	
 </insert>
+<!-- 오늘 예약된 시간 -->
+<select id="selectTotalData" parameterType="string" resultType="int">
+	select nvl(sum(use_time), 0)
+	from tb_statistic
+	where book_date = #{bookDate}
+</select>
+<!-- 오늘 방별로 예약된 시간 -->
+<select id="selectTotalDataByRoom" parameterType="statisticVO" resultType="int">
+	select nvl(sum(use_time), 0)
+	from tb_statistic
+	where book_date=#{bookDate} 
+		  and book_room_name=#{bookRoomName}
+</select>
 </mapper>
 
 

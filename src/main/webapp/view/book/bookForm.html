@@ -1,6 +1,7 @@
 <div id="bookView" class="view">
 	<p id="brief"></p>
 	<div id="leftArea"> 
+	<h3>1.예약정보입력</h3><hr>
 	<p>ㄱ. 날짜선택</p>
 	<div id="datePicker"></div>
 		<div id="rChoose">
@@ -12,7 +13,7 @@
 				</select>
 				<button id="timeChk"type="button">예약시간 확인</button>
 				<p>ㄷ.예약자정보</p>
-				아이디&nbsp&nbsp&nbsp
+				아이디&nbsp&nbsp&nbsp&nbsp
 				<input type="text" name="memberId" placeholder="아이디"><br>
 				전화번호
 				<input type="text" name="memberMobileNo" placeholder="숫자만 입력해주세요.">
@@ -32,20 +33,22 @@
 				<input type="radio" id="roomG" name="roomName" value="g">
 				<label for="roomG">g</label>
 				<p>ㅁ.인원수</p>
-				<input type="number" name="headCnt" id="headCnt" step="1" max="10" min="1">
+				<input type="number" name="headCnt" id="headCnt" step="1" max="10" min="1" value="1">
 				<hr>
 				<button>예약</button>
 			</form>
 		</div>
 	</div>
 	<div id="centerArea">
+		<h3>2.스터디룸 한눈에 보기</h3><hr>
 		<img id="roomReservationInfo" width="500px" height="400px"/>
 		<hr>
-		<p><예약현황></p>
+		<p><예약된방정보></p>
 		<div id="timeSheet"></div>
 	</div>
 	
 	<div id="rightArea">
+		<h3>3.선택한방 미리보기</h3><hr>
 		<img id="roomImg" width="300px" height="400px"/>
 		<div id="roomInfo"></div>
 	</div>

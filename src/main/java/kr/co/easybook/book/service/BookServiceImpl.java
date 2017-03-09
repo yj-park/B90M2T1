@@ -1,6 +1,8 @@
 package kr.co.easybook.book.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,5 +43,26 @@ public class BookServiceImpl implements BookService{
 		return mapper.selectRoomInfo(name);
 	}
 
-
+//	통계테이블에서 데이터 가져오기
+	public Map<String, Object> retriveBookData(String toDay) {
+		Map<String, Object> map = new HashMap<>();
+		StatisticVO statisticVO = new StatisticVO();
+		map.put("total",  mapper.selectTotalData(toDay));
+		statisticVO.setBookDate(toDay);
+		statisticVO.setBookRoomName("a");
+		map.put("a", mapper.selectTotalDataByRoom(statisticVO));
+		statisticVO.setBookRoomName("b");
+		map.put("b", mapper.selectTotalDataByRoom(statisticVO));
+		statisticVO.setBookRoomName("c");
+		map.put("c", mapper.selectTotalDataByRoom(statisticVO));
+		statisticVO.setBookRoomName("d");
+		map.put("d", mapper.selectTotalDataByRoom(statisticVO));
+		statisticVO.setBookRoomName("e");
+		map.put("e", mapper.selectTotalDataByRoom(statisticVO));
+		statisticVO.setBookRoomName("f");
+		map.put("f", mapper.selectTotalDataByRoom(statisticVO));
+		statisticVO.setBookRoomName("g");
+		map.put("g", mapper.selectTotalDataByRoom(statisticVO));
+		return map;
+	}
 }

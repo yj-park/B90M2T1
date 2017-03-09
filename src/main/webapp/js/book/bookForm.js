@@ -96,7 +96,7 @@ function calendar() {
 					console.dir(result);
 					var html = "";
 					for(i = 0; i < result.length; i++) {
-						html += "<h6>" + result[i].roomName + " : " + result[i].bookStartTime + "-" + result[i].bookEndTime + "</h6>";
+						html += "<p>" + result[i].roomName + "룸 : " + result[i].bookStartTime + "시 - " + result[i].bookEndTime + "시 </p>";
 					}
 					alert("선택한 시간의 예약현황을 확인해 주세요.");
 					$("#centerArea > #timeSheet").html(html);
@@ -107,7 +107,7 @@ function calendar() {
 		
 		/*form submit 이벤트발생시  */
 		$("#rForm").submit(function () {
-			var rf = $("#rForm");
+			getUserInfo;
 			if($("#rForm > [name=startTime]").val() >= $("#rForm > [name=endTime]").val()) {
 				alert("예약종료시간을 확인해 주세요");
 				return false;
@@ -176,8 +176,25 @@ function calendar() {
 				$("#roomReservationInfo").attr("src", result.imgSavePath);
 			});
 		}
+		function getUserInfo() {
+			$.ajax ({
+				url : "book/getUserInfo.do",
+				dataType : "json"
+				
+			})
+			.done(function (result) {
+				if(result.msg) {
+					 $("#rForm > [name=memberId]").val(result.id);
+				}
+				else {
+					alert("예약을 위해 로그인해 주세요!");
+					return false;
+				}
+			}); 
+		}
 		calendar();
 		makeSelect();
 		structInfo("r");
+		getUserInfo();
 		// 페이지 로딩시 방구조 이미지  ajax 호출
 //		structInfo("roomstruct");
