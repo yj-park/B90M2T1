@@ -70,8 +70,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 */
 	@Override
-	public void commentRegist(CommentVO comment) throws Exception {
+	public List<CommentVO> commentRegist(CommentVO comment) throws Exception {
 		dao.insertBoardComment(comment);
+		return dao.selectBoardCommentByNo(comment.getBoardNo());
 	}
 
 	@Override

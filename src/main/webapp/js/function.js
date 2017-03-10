@@ -241,7 +241,7 @@ function makeCommentList(result) {
 }
 
 function commentWrite() {
-	var no = board.no;
+	bodNo = board.no;
 	var memberId = $("[name=memberId]").val();
 	var content = $("[name=content]").val();
 	
@@ -249,13 +249,13 @@ function commentWrite() {
 		url: "/mini2-team1/board/commentRegister.do",
 		type: "POST",
 		data: {
-			"no" : no,
+			"no" : bodNo,
 			"memberId" : memberId,
 			"content" : content
 		}
 	})
 	.done(function() {
-		alert("댓글이 등록되었습니다.");
+		detail(bodNo);
 	})
 
 }

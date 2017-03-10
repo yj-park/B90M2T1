@@ -22,7 +22,7 @@ public interface BoardService {
 	
 //	public List<CommentVO> commentUpdate(CommentVO comment) throws Exception ;
 	
-	public void commentRegist(CommentVO comment) throws Exception;
+	public List<CommentVO> commentRegist(CommentVO comment) throws Exception;
 	
 	public List<CommentVO> commentList(int no) throws Exception ;
 	

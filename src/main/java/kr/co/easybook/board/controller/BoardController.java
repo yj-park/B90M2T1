@@ -148,12 +148,13 @@ public class BoardController {
 	
 	@RequestMapping("board/commentRegister.do")
 	@ResponseBody
-	public void commentRegister(int no, String memberId, String content) throws Exception {
+	public List<CommentVO> commentRegister(int no, String memberId, String content) throws Exception {
 		CommentVO comment = new CommentVO();
 		comment.setBoardNo(no);
 		comment.setMemberId(memberId);
 		comment.setContent(content);
-		service.commentRegist(comment);
+		List<CommentVO> list = service.commentRegist(comment);
+		return list;
 	}
 	
 	@RequestMapping("board/commentDelete.do")
