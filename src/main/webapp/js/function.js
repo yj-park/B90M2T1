@@ -1,4 +1,9 @@
 
+function listgo() {
+	$("#container").load("view/board/list.html");
+}
+
+
 /** 전체목록과 관련된 함수 **/
 function pageList(pageNo) {
 	if (pageNo === undefined) {
