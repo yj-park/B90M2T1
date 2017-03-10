@@ -91,4 +91,14 @@ public class MemberController {
 			}
 			return param;
 		}
+		
+		// 로그아웃
+		@RequestMapping("/memLogout.do")
+		public Map<String, Object> memLogout(HttpSession session) throws Exception {
+			session.invalidate();
+			
+			Map<String, Object> param = new HashMap<>();
+			param.put("msg", "로그아웃 성공!");
+			return param;
+		}
 }
