@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+
 import kr.co.easybook.member.service.MemberService1;
 import kr.co.easybook.repository.vo.MemberVO;
 import kr.co.easybook.repository.vo.SearchVO;
@@ -56,12 +58,12 @@ public class MyPageController {
 	
 	@RequestMapping("/profileUpdate.do")
 	public void profileUpdate(String password, HttpSession session) throws Exception {
+			MemberVO member = (MemberVO)session.getAttribute("mem");
+			System.out.println(member.getId());
+			MemberVO mem = memberService1.selectMember(member.getId());
+			mem.setPassword(password);
+			memberService1.update(mem);
 		
-		MemberVO member = (MemberVO)session.getAttribute("mem");
-		System.out.println(member.getId());
-		MemberVO mem = memberService1.selectMember(member.getId());
-		mem.setPassword(password);
-		memberService1.update(mem);
 
 	}
 	

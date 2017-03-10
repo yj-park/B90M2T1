@@ -144,7 +144,7 @@
 	    var userLongitude;
 
 	    if(navigator.geolocation) {
-			navigator.geolocation.watchPosition(function(pos) {
+			navigator.geolocation.getCurrentPosition(function(pos) {
 				userLatitude = pos.coords.latitude;
 				userLongitude =  pos.coords.longitude;
 				initMap(userLatitude, userLongitude);
@@ -289,7 +289,7 @@
 
     </script>
     <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDglDOZqHU_THCFCywZmDjgBXHnmf2iZEM">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBOIKtSkMFEV8KfG2YrUXFEtONsLWep50">
    </script> 
   </body>
 </html>

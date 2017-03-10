@@ -106,19 +106,6 @@ function bookDelete(no) {
 
 
 $("#btnUpdate").click(function(){
-	var id = $("[name='id']").val();
-	var icon = "@"
-	if(id.indexOf(icon) != -1) {
-		//alert("aa")
-		$.ajax({
-			url: "/mini2-team1/myPage/profileUpdate.do",
-			data: {"id" : id}
-		})
-		.done(function() {
-			swal("등록되었습니다.");
-		});
-	}
-	else{
 		var pass = $("[name=pass]").val();
 		$.ajax({
 			url: "/mini2-team1/myPage/profileUpdate.do",
@@ -127,7 +114,7 @@ $("#btnUpdate").click(function(){
 		.done(function() {
 			swal("변경되었습니다.");
 		});
-	}
+	
 });
 
 
