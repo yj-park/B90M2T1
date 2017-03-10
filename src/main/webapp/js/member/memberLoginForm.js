@@ -61,6 +61,10 @@
 		  if(result.googleIdChk){
 			  swal("구글 로그인 성공!");
 			  sessionStorage.setItem("type", "google");
+			  sessionStorage.setItem("id", profile.getEmail());
+			  sessionStorage.setItem("name", profile.getName());
+			  
+			  googleSetSession();
 			  $("#memLogin").attr("style", "display:none");
 			  $("#memJoin").attr("style", "display:none");
 			  $("#memInfo").attr("style", "display:block");
@@ -79,7 +83,27 @@
 	  })
 	};
 
+	//	구글로그인세션올리기
+	function googleSetSession() {
+		 $.ajax ({
+				url: "member/memLoginChk.do",
+				type: "POST",
+				dataType: "json",
+				data: {
+					"id": sessionStorage.getItem("id")
+					}	
+		  })
+		  $("#memLogin").attr("style", "display:none");
+		  $("#memJoin").attr("style", "display:none");
+		  $("#memInfo").attr("style", "display:block");
+		  $("#memLogout").attr("style", "display:block");
+		  $("#container").load("view/main/main.html");
+		  console.log("구글세션등록");
+	}
 
+	
+	
+	
 	// 구글 연동 로그아웃
 	function signOut() {
 		var type = sessionStorage.getItem("type");

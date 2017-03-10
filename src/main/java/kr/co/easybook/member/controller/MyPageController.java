@@ -23,7 +23,7 @@ public class MyPageController {
 	public Map<String, Object> list(SearchVO search, HttpSession session) throws Exception {
 		//System.out.println("hi");
 		MemberVO member = (MemberVO)session.getAttribute("mem");
-		//System.out.println(member);
+		System.out.println(member.getName());
 		Map<String, Object> map = null;
 		if(member.getId() != "") {
 			search.setMemberId(member.getId());
@@ -46,10 +46,24 @@ public class MyPageController {
 	}
 	
 	
+//	
+	@RequestMapping("/profile.do")
+	public MemberVO profileList(HttpSession session) throws Exception {
+		MemberVO member = (MemberVO)session.getAttribute("mem");
+		return member;
+	}
 	
 	
-	
-	
+	@RequestMapping("/profileUpdate.do")
+	public void profileUpdate(String password, HttpSession session) throws Exception {
+		
+		MemberVO member = (MemberVO)session.getAttribute("mem");
+		System.out.println(member.getId());
+		MemberVO mem = memberService1.selectMember(member.getId());
+		mem.setPassword(password);
+		memberService1.update(mem);
+
+	}
 	
 	
 }
