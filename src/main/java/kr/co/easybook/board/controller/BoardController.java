@@ -156,6 +156,13 @@ public class BoardController {
 		service.commentRegist(comment);
 	}
 	
+	@RequestMapping("board/commentDelete.do")
+	@ResponseBody
+	public List<CommentVO> commentDelete(CommentVO comment) throws Exception{
+		List<CommentVO> list = service.commentDelete(comment);
+		return list;
+	}
+	
 	public static void main(String[] args) {
 		for (int count = 0; count < 100; count++) {
 			// 마지막 페이지 구하기

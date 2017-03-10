@@ -79,10 +79,10 @@ public class BoardServiceImpl implements BoardService {
 		return dao.selectBoardCommentByNo(no);
 	}
 
-	/*@Override
+	@Override
 	public List<CommentVO> commentDelete(CommentVO comment) throws Exception {
 		dao.deleteBoardComment(comment.getNo());
-		return dao.selectBoardCommentByNo(comment.getNo());
-	}*/
+		return dao.selectBoardCommentByNo(comment.getBoardNo());
+	}
 
 }

@@ -229,8 +229,8 @@ function makeCommentList(result) {
 		         + date.getSeconds();
 		html += '	<td>' + time + '</td>';  
 		html += '	<td>';    
-		html += '		<a href="javascript:commentUpdateForm(' + comment.no + ')" class="btn btn-success btn-sm" role="button">수정</a>';    
-		html += '		<a href="javascript:commentDelete(' + comment.no + ')" class="btn btn-danger btn-sm" role="button">삭제</a>';    
+		html += '		<a href="javascript:commentUpdateForm(' + comment.no + ','+ comment.boardNo +')" class="btn btn-success btn-sm" role="button">수정</a>';    
+		html += '		<a href="javascript:commentDelete(' + comment.no + ','+ comment.boardNo +')" class="btn btn-danger btn-sm" role="button">삭제</a>';    
 		html += '	</td>';    
 		html += '</tr>';
 	}
@@ -258,6 +258,27 @@ function commentWrite() {
 		alert("댓글이 등록되었습니다.");
 	})
 
+}
+
+function commentDelete(coNo, boNo) {
+	console.log("댓글 no : " + coNo);
+	console.log("게시판 no : " + boNo);
+	
+	$.ajax({
+		url: "/mini2-team1/board/commentDelete.do",
+		dataType: "json",
+		data: {
+			no : coNo,
+			boardNo : boNo
+		}
+	})
+	.done(function(){
+		detail(boNo);
+	})
+}
+
+function commentUpdateForm(no) {
+	alert("ㅡ.ㅡ");
 }
 
 pageList();

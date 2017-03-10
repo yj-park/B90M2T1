@@ -135,4 +135,9 @@
 		values(s_comment_no.nextVal, #{boardNo}, #{memberId}, #{content} )
 	</insert>
 	
+	<delete id="deleteBoardComment" parameterType="int">
+		delete
+			from tb_comment
+			where no = #{no}
+	</delete>
 </mapper>

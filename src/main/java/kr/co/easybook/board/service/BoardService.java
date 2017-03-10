@@ -26,7 +26,7 @@ public interface BoardService {
 	
 	public List<CommentVO> commentList(int no) throws Exception ;
 	
-//	public List<CommentVO> commentDelete(CommentVO comment) throws Exception ;
+	public List<CommentVO> commentDelete(CommentVO comment) throws Exception ;
 
 	public Map<String, Object> detail(int no) throws Exception;
 }
