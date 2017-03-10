@@ -25,11 +25,14 @@ $("#btnLogin").click(function () {
 		console.log(msg);
 		if(msg == "Hello"){
 			swal("로그인 성공!");
+			
 			$("#memLogin").attr("style", "display:none");
 			$("#memJoin").attr("style", "display:none");
 			$("#memInfo").attr("style", "display:block");
 			$("#memLogout").attr("style", "display:block");
 			$("#container").load("view/main/main.html");
+			
+			sessionStorage.setItem("type", "default");
 		}
 		else {
 			swal("아이디 또는 비밀번호를 확인해주세요");
@@ -67,7 +70,7 @@ function onSignIn(googleUser) {
 		  $("#container").load("view/member/memberJoinForm.html");
 		  localStorage.setItem("id", profile.getEmail());
 		  localStorage.setItem("name", profile.getName());
-		  localStorage.setItem("type", "google");
+		  sessionStorage.setItem("type", "google");
 	  }
   })
 };
