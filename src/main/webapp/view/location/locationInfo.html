@@ -142,7 +142,9 @@
     <script type="text/javascript">
 	    var userLatitude;
 	    var userLongitude;
-
+		$(function(){
+			
+		
 	    if(navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(pos) {
 				userLatitude = pos.coords.latitude;
@@ -164,7 +166,7 @@
 				maximumAge: 0
 			});
 		}	
-		
+	})	
 
 		var map;
 		function initMap(userLatitude, userLongitude) {
@@ -219,8 +221,9 @@
 			var marker = new google.maps.Marker({
 				  position: {lat: 37.519582, lng: 126.940221},
 				  map: map,
-				 title: '이지북(easybook)',
-				 label: 'D'
+				  title: '이지북(easybook)',
+				  label: 'D',
+				  icon: 'green'
 				  });
 	  		//사용자 위치에 마커
 			var marker1 = new google.maps.Marker({
