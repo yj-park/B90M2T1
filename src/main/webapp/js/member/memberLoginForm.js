@@ -14,6 +14,9 @@
 		}).done(function(msg) {
 			console.log(msg);
 			if(msg == "Hello"){
+		//		var type = sessionStorage.getItem("type");
+				
+				
 //	 			var session = document.getElementById("mem").value;
 //	 			console.log(session);
 //	 			console.log("mem");
@@ -26,16 +29,14 @@
 				
 				sessionStorage.setItem("type", "default");
 				console.log(sessionStorage.getItem("type"));
+				
 				// console.log(sessionStorage.getItem(type));
 				/* localStorage.setItem("type", "default");
 				console.log(localStorage.getItem(type));
 				console.log(localStorage.getItem("type")); */
-				
 			}
 			else {
-				
 				swal("아이디 또는 비밀번호를 확인해주세요");
-				
 			}
 			
 		})
@@ -59,19 +60,21 @@
 	  }).done (function (result){
 		  if(result.googleIdChk){
 			  swal("구글 로그인 성공!");
+			  sessionStorage.setItem("type", "google");
 			  $("#memLogin").attr("style", "display:none");
 			  $("#memJoin").attr("style", "display:none");
 			  $("#memInfo").attr("style", "display:block");
 			  $("#memLogout").attr("style", "display:block");
 			  $("#container").load("view/main/main.html");
+			  console.log(sessionStorage.getItem("type"));
 		  }
 		  else {
 			  swal("추가 정보 입력을 위해 회원가입 페이지로 이동!");
 //	 		  $("#container").load("view/member/memberJoinForm.html?id="+profile.getEmail()+"&name="+profile.getName()+" );
+			  sessionStorage.setItem("type", "google");
 			  $("#container").load("view/member/memberJoinForm.html");
 			  localStorage.setItem("id", profile.getEmail());
 			  localStorage.setItem("name", profile.getName());
-			  sessionStorage.setItem("type", "google");
 		  }
 	  })
 	};

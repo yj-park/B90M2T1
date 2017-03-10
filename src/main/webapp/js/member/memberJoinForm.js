@@ -3,9 +3,9 @@
  */
 
 $(function() {
-//	alert("2")
-	var type = localStorage.getItem("type");
-	
+//	alert("2");
+	var type = sessionStorage.getItem("type");
+	console.log(type);
 	if(type == "google") {
 		googleMemJoin();
 	}
