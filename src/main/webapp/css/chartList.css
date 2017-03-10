@@ -1,17 +1,23 @@
 @CHARSET "UTF-8";
-#chartView {
-	height: 100%;
-	width: 100%;
-	padding-left: 200px;
-}
-#chartView > img {
-	padding-top: 150px;
-	padding-bottom: 250px;
-}
 
+#chartView {
+	width: 100%;
+	height: 860px;
+}
 #chart1 {
+	padding-left: 200px;
+	padding-top: 200px;
+	width: 50%;
 	float: left;
 	}
 #chart2 {
+	padding-top: 200px;
+	width: 50%
 	float: left;
 	}
+#bottom {
+	clear: both;
+}
+#chartView > img {
+	padding-top: 150px;
+}

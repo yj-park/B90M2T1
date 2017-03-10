@@ -80,7 +80,7 @@ function calendar() {
 			timeChk();
 		}); 
 		
-		// 예약시간 체크하기
+		// 예약시간 체크함수
 		function timeChk() {
 			if($("#rForm > [name=startTime]").val() >= $("#rForm > [name=endTime]").val()) {
 				swal("시작시간과 종료시간을  확인해 주세요");
@@ -185,6 +185,7 @@ function calendar() {
 				$("#roomReservationInfo").attr("src", result.imgSavePath);
 			});
 		}
+		/*사용자 로그인 확인하기 */
 		function getUserInfo() {
 			$.ajax ({
 				url : "book/getUserInfo.do",
@@ -206,5 +207,4 @@ function calendar() {
 		makeSelect();
 		structInfo("r");
 		getUserInfo();
-		// 페이지 로딩시 방구조 이미지  ajax 호출
-//		structInfo("roomstruct");
+		
