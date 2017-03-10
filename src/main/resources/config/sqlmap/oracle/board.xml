@@ -140,4 +140,11 @@
 			from tb_comment
 			where no = #{no}
 	</delete>
+	
+	<update id="updateBoardComment" parameterType="commentVO">
+		update tb_comment
+			set	content = #{content}
+			where no = #{no} 
+	</update>
+	
 </mapper>

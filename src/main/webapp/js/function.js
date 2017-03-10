@@ -143,7 +143,7 @@ function abc() {
 		contentType: false
 	})
 	.done(function() {
-		alert("게시물이 등록되었습니다.");
+		swal("게시물이 등록되었습니다.");
 		$("#container").load("view/board/list.html");
 		pageList();
 	})
@@ -157,7 +157,7 @@ function deletePage(delNo) {
 		data: {"no" : delNo}
 	})
 	.done(function() {
-		alert("게시물이 삭제되었습니다.");
+		swal("게시물이 삭제되었습니다.");
 		$("#container").load("view/board/list.html");
 		pageList();
 	});
@@ -194,7 +194,7 @@ function pageUpdate() {
 		} 		
 	})
 	.done(function() {
-		alert("수정되었습니다.");
+		swal("수정되었습니다.");
 		$("#container").load("view/board/list.html");
 	})
 }
@@ -282,9 +282,58 @@ function commentDelete(coNo, boNo) {
 	})
 }
 
-function commentUpdateForm(no) {
-	alert("ㅡ.ㅡ");
+function commentUpdateForm(commentNo, boardNo) {
+	
+	$("#commentList tr[id^=row]").show();
+	$("#commentList tr[id^=modRow]").remove();
+	
+	var modId = $("#row" + commentNo + " > td:eq(0)").text();
+	var modContent = $("#row" + commentNo + " > td:eq(1)").text();
+	
+	var html = '';
+	html += '<tr id="modRow' + commentNo + '">';
+	html += '	<td>' + modId + '</td>';
+	html += '	<td>';
+	html += '		<div class="form-group">';
+	html += '			<input type="text" name="content" value="' + modContent + '" class="form-control input-wp2" placeholder="내용을 입력하세요">';
+	html += '		</div>';
+	html += '	</td>';
+	html += '	<td colspan="2">'; 
+	html += '		<a href="javascript:commentUpdate(' + commentNo + ',' + boardNo + ');" class="btn btn-success btn-sm" role="button">수정</a>';
+	html += '		<a href="javascript:commentCancel(' + commentNo + ');" class="btn btn-warning btn-sm" role="button">취소</a>';
+	html += '	</td>';
+	html += '</tr>';
+	$("#row" + commentNo).after(html);	
+	$("#row" + commentNo).hide();
 }
+
+function commentCancel(commentNo) {
+	$("#row" + commentNo).show();
+	$("#modRow" + commentNo).remove();
+}
+
+function commentUpdate(commentNo, boardNo) {
+	var coNo = commentNo;
+	var content = $("#modRow" + commentNo + " input[name=content]").val();
+	var boNo = boardNo;
+	
+	console.log(coNo);
+	console.log(content);
+	console.log(boNo);
+	
+	$.ajax({
+		url: "/mini2-team1/board/commentUpdate.do",
+		data: {
+			no : coNo,
+			boardNo : boNo,
+			content : content
+		}
+	})
+	.done(function() {
+		detail(boNo);
+	})
+}
+
 
 pageList();
 

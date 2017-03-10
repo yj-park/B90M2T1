@@ -15,12 +15,10 @@ public interface BoardService {
 	public void update(BoardVO board) throws Exception;	
 
 	public Map<String, Object> list(SearchVO search) throws Exception;
-	
-//	public Map<String, Object> detail(SearchVO search) throws Exception;
-	
+		
 	public void delete(int no) throws Exception;
 	
-//	public List<CommentVO> commentUpdate(CommentVO comment) throws Exception ;
+	public List<CommentVO> commentUpdate(CommentVO comment) throws Exception ;
 	
 	public List<CommentVO> commentRegist(CommentVO comment) throws Exception;
 	

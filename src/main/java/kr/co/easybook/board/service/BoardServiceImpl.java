@@ -63,12 +63,12 @@ public class BoardServiceImpl implements BoardService {
 		dao.deleteBoard(no);
 	}
 
-/*	@Override
+	@Override
 	public List<CommentVO> commentUpdate(CommentVO comment) throws Exception {
 		dao.updateBoardComment(comment);
 		return dao.selectBoardCommentByNo(comment.getNo());
 	}
-*/
+
 	@Override
 	public List<CommentVO> commentRegist(CommentVO comment) throws Exception {
 		dao.insertBoardComment(comment);

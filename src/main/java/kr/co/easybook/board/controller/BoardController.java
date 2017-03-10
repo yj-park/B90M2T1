@@ -159,8 +159,15 @@ public class BoardController {
 	
 	@RequestMapping("board/commentDelete.do")
 	@ResponseBody
-	public List<CommentVO> commentDelete(CommentVO comment) throws Exception{
+	public List<CommentVO> commentDelete(CommentVO comment) throws Exception {
 		List<CommentVO> list = service.commentDelete(comment);
+		return list;
+	}
+	
+	@RequestMapping("board/commentUpdate")
+	@ResponseBody
+	public List<CommentVO> commentUpdate(CommentVO comment) throws Exception {
+		List<CommentVO> list = service.commentUpdate(comment);
 		return list;
 	}
 	

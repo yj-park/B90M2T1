@@ -32,7 +32,7 @@ public interface BoardMapper {
 	public void insertBoardComment(CommentVO comment) throws Exception;
 	public List<CommentVO> selectBoardCommentByNo(int no) throws Exception;
 	public void deleteBoardComment(int commentNo) throws Exception;
-//	public void updateBoardComment(CommentVO comment) throws Exception;
+	public void updateBoardComment(CommentVO comment) throws Exception;
 }
 
 
