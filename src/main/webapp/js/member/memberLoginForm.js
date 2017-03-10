@@ -61,6 +61,8 @@
 		  if(result.googleIdChk){
 			  swal("구글 로그인 성공!");
 			  sessionStorage.setItem("type", "google");
+			  sessionStorage.setItem("id", profile.getEmail());
+			  sessionStorage.setItem("name", profile.getName());
 			  $("#memLogin").attr("style", "display:none");
 			  $("#memJoin").attr("style", "display:none");
 			  $("#memInfo").attr("style", "display:block");
